@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import * as api from "../api/lukker-requests";
+//import * as api from "../api/lukker-requests";
 import App from "../App";
-import { LukkerInfo } from "../component/lukker-info";
+//import { LukkerInfo } from "../component/lukker-info";
 
 // smoke test
 test("Github action works correctly", async () => {
