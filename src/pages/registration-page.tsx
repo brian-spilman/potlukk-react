@@ -1,5 +1,6 @@
-import { useReducer, useState } from "react";
+import { FormEvent, FormEventHandler, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createLukker } from "../api/lukker-requests";
 import { PotLukkerRegistrationDetails, registrationReducer, RegistrationState } from "../reducers/registration-reducer";
 
 const initialState: RegistrationState = {
@@ -8,7 +9,8 @@ const initialState: RegistrationState = {
     password2:"",
     fname: "",
     lname: "",
-    allergies: []
+    allergies: [],
+    isVerified: false
 }
 
 export function RegistrationPage() {
@@ -27,15 +29,27 @@ export function RegistrationPage() {
     //     return true;
     // }
 
-    function submitData(){
-        // if(pwValidator(form.password1))
-        // if(form.password1 !== form.password2){
-        //     alert("Passwords do not match!");
-        // }
+    async function submitData(event:FormEvent<HTMLFormElement>){
 
-        dispatch({type:"ADD_LUKKER"});
+        event.preventDefault();
 
-        navigate("/home");
+        if(registrationState.isVerified === true){
+
+            let lukker: PotLukkerRegistrationDetails = {username: "", password: "", fname: "", lname: "", allergies: []};
+            lukker.username = registrationState.username;
+            lukker.password = registrationState.password1;
+            lukker.fname = registrationState.fname;
+            lukker.lname = registrationState.lname;
+            lukker.allergies = registrationState.allergies;
+
+            const returnLukker = createLukker(lukker);
+
+            navigate("/home");
+        }else{
+            alert("Passwords incorrect");
+        }
+
+        
         
     }
 
@@ -43,7 +57,7 @@ export function RegistrationPage() {
 
         <h1>Hello welcome to registration</h1>
 
-        <form onSubmit={submitData}>
+        <form onSubmit={(e:FormEvent<HTMLFormElement>) => submitData(e)}>
 
             <label htmlFor="firstName">First Name</label>
             <input id="firstName" type="text" placeholder="John" onChange={e => dispatch({type:"SET_FIRST_NAME", payload:e.target.value})}/>
@@ -59,10 +73,10 @@ export function RegistrationPage() {
             <hr />
 
             <label htmlFor="firstPassword">Password *</label>
-            <input id="firstPassword" type="password" placeholder="*****" onChange={e => dispatch({type:"SET_PASSWORD_ONE", payload:e.target.value})} required/>
+            <input id="firstPassword" type="text" placeholder="*****" onChange={e => {dispatch({type:"SET_PASSWORD_ONE", payload:e.target.value}); dispatch({type:"VERIFY_LUKKER"});}} required/>
 
             <label htmlFor="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" placeholder="*****" onChange={e => dispatch({type:"SET_PASSWORD_TWO", payload:e.target.value})} required/>
+            <input type="text" id="confirmPassword" placeholder="*****" onChange={e => {dispatch({type:"SET_PASSWORD_TWO", payload:e.target.value}); dispatch({type:"VERIFY_LUKKER"});}} required/>
 
             <hr />
 
