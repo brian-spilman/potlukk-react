@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
-import { getLukkers, Lukker } from "../api/lukker-requests"
+import { getLukkers } from "../api/lukker-requests"
+import { Lukker } from "../reducers/registration-reducer"
 
 
 export function LukkerInfo(){
