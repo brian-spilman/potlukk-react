@@ -1,5 +1,9 @@
 import { Lukker, PotLukkerRegistrationDetails } from "../reducers/registration-reducer";
 
+export type SignInLukker = {
+    username: string,
+    password: string
+}
 
 export async function getLukkers(): Promise<Lukker[]>{
 
@@ -14,6 +18,19 @@ export async function createLukker(newLukker: PotLukkerRegistrationDetails): Pro
         body:JSON.stringify(newLukker),
         headers: {
             "Content-Type":"application/json"
+        }
+    });
+
+    const lukker:Lukker = await httpResponse.json();
+    return lukker;
+}
+
+export async function signInLukker(lukkerVerify: SignInLukker): Promise<Lukker> {
+    const httpResponse = await fetch("http://127.0.0.1:8000/verify", {
+        method:"POST",
+        body:JSON.stringify(lukkerVerify),
+        headers: {
+            "Content-Type":"application/json" 
         }
     });
 
