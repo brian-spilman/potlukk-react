@@ -75,11 +75,11 @@ export function registrationReducer(state: RegistrationState = initialState, act
             return nextState;
         }
         case "SET_ALLERGY": {
-            console.log("Allergy Action");
             const item = action.payload.toUpperCase();
             if(nextState.allergies.includes(item)){
                 const index = nextState.allergies.indexOf(item);
                 nextState.allergies.splice(index, 1);
+                return nextState;
             }
             nextState.allergies.push(item)
             return nextState;
@@ -89,7 +89,7 @@ export function registrationReducer(state: RegistrationState = initialState, act
             //     alert("Password must be at least 10 characters.")
             // }
 
-            console.log("Right here");
+            //console.log("Right here");
 
             // const passwordValidation = "?=.*[*.!@$%^&?~\]{9,}"
             // if(!(nextState.password1.match(passwordValidation))){
