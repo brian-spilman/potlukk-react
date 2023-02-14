@@ -18,6 +18,7 @@ export function NavBar(){
     
         <ul>
             <li><Link to="/home">Home</Link></li>
+            <li><Link to="/host">Host</Link></li>
             <button onClick={logoutFunc}>Logout</button>
         </ul>
     
