@@ -51,8 +51,6 @@ export function RegistrationPage() {
             alert("Passwords incorrect");
         }
 
-        
-        
     }
 
     return <>
