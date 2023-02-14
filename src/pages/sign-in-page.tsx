@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { sign } from "crypto";
+import { FormEvent, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { signInLukker } from "../api/lukker-requests";
 
@@ -12,12 +13,19 @@ export function SignInPage() {
     const navigate = useNavigate();
     const [form, setForm] = useState<SignInForm>({username:"", password:""});
 
-    async function signIn(){
+    async function signIn(event:FormEvent<HTMLFormElement>){
+
+        event.preventDefault();
+
         const lukker = await signInLukker({username:form.username, password:form.password});
         //if(lukker.msg) if fail then alert and stay on sign in
         // else go to home
         if(lukker.username === form.username){ // FIX!! Redirects back to sign in even if info correct
+
+            localStorage.setItem("username", lukker.username);
+
             navigate("/home");
+            
         }
     }
 
@@ -26,7 +34,7 @@ export function SignInPage() {
     }
 
     return <>
-        <form>
+        <form onSubmit={(e:FormEvent<HTMLFormElement>) => signIn(e)}>
             <h1>Sign Page</h1>
 
             <label htmlFor="username">User Name</label>
@@ -35,7 +43,7 @@ export function SignInPage() {
             <label htmlFor="password">Password</label>
             <input id="password" type="text" placeholder="******" onChange={e => setForm({...form, password:e.target.value})} />
 
-            <button onClick={signIn}>Sign In</button>
+            <button type="submit">Sign In</button>
             <hr />
             <h2>New User</h2>
             <button onClick={registrationGoTo}>Sign Up</button>
