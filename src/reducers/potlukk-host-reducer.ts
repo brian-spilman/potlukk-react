@@ -1,5 +1,3 @@
-import { createPotlukk } from "../api/lukker-requests";
-
 export type PotLukk = {
     time: string,
     location: string,
