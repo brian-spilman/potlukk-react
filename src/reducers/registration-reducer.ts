@@ -98,7 +98,7 @@ export function registrationReducer(state: RegistrationState = initialState, act
             //     return nextState;
             // }
 
-            checkRegex(nextState.password1);
+            //checkRegex(nextState.password1);
 
             if (nextState.password1 !== nextState.password2) {
                 //alert("Passwords don't match! Fix and try again.");
@@ -117,15 +117,15 @@ export function registrationReducer(state: RegistrationState = initialState, act
 
     }
 
-    function checkRegex(password1: string) {
-        const checkSpecial = /[0-9*@!#%&~]+/.test(state.password1)
-        let valid = false;
-        if (!checkSpecial && nextState.password1.length >= 10) {
-            valid = true;
-            return nextState;
-        } else {
-            valid = false;
-            return nextState;
-        }
-    }
+    // function checkRegex(password1: string) {
+    //     const checkSpecial = /[0-9*@!#%&~]+/.test(state.password1)
+    //     let valid = false;
+    //     if (!checkSpecial && nextState.password1.length >= 10) {
+    //         valid = true;
+    //         return nextState;
+    //     } else {
+    //         valid = false;
+    //         return nextState;
+    //     }
+    // }
 }
