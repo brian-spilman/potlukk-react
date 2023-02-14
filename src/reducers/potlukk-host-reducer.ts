@@ -30,15 +30,17 @@ export type PotlukkCreationState = {
     tags: string[]
 }
 
+export type SetPotlukkTitleAction = { type: "SET_TITLE", payload: string};
+export type SetPotlukkTimeAction = { type: "SET_TIME", payload: number };
+export type SetPotlukkLocationAction = { type: "SET_LOCATION", payload: string };
+export type SetPotlukkDescriptionAction = { type: "SET_DESCRIPTION", payload: string };
+export type SetPotlukkPublic = { type: "SET_PUBLIC", payload: boolean };
+// export type SetPotlukkTag = { type: "SET_TAG", payload: string[]};
+export type AddPotlukk = { type: "ADD_POTLUKK" };
 
-export type SetPotLukkTimeAction = { type: "SET_TIME", payload: number };
-export type SetPotLukkLocationAction = { type: "SET_LOCATION", payload: string };
-export type SetPotLukkDescriptionAction = { type: "SET_DESCRIPTION", payload: string };
-export type SetPotLukkPublic = { type: "SET_PUBLIC", payload: boolean };
-export type AddPotLukk = { type: "ADD_POTLUKK" };
-
-export type PotlukkCreationAction = SetPotLukkTimeAction | SetPotLukkLocationAction |
-    SetPotLukkDescriptionAction | SetPotLukkPublic | AddPotLukk
+export type PotlukkCreationAction = SetPotlukkTitleAction | SetPotlukkTimeAction | SetPotlukkLocationAction |
+    SetPotlukkDescriptionAction | SetPotlukkPublic | AddPotlukk
+   // SetPotlukkTag 
 
 const initialState: PotlukkCreationState = {
     title: "",
@@ -56,6 +58,10 @@ export function potlukkHostReducer(state: PotlukkCreationState = initialState, a
 
     switch (action.type) {
 
+        case "SET_TITLE": {
+            nextState.title = action.payload;
+            return nextState;
+        }
         case "SET_TIME": {
             nextState.time = action.payload;
             return nextState;
@@ -72,7 +78,12 @@ export function potlukkHostReducer(state: PotlukkCreationState = initialState, a
             nextState.isPublic = action.payload;
             return nextState;
         }
+        // case "SET_TAG": {
+        //     nextState.tags.push()
+        //     return nextState;
+        // }
         case "ADD_POTLUKK": {
+            alert("Potlukk successfully created!");
             return nextState;
         }
 
