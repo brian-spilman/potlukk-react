@@ -26,6 +26,8 @@ export function SignInPage() {
 
             navigate("/home");
             
+        }else{
+            alert("Incorrect login information");
         }
     }
 
