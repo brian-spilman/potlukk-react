@@ -44,6 +44,8 @@ export function RegistrationPage() {
 
             const returnLukker = createLukker(lukker);
 
+            localStorage.setItem("username", lukker.username);
+
             navigate("/home");
         }else{
             alert("Passwords incorrect");
