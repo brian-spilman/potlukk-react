@@ -23,6 +23,7 @@ export function SignInPage() {
         if(lukker.username === form.username){ // FIX!! Redirects back to sign in even if info correct
 
             localStorage.setItem("username", lukker.username);
+            localStorage.setItem("userId", lukker.userId.toString());
 
             navigate("/home");
             
