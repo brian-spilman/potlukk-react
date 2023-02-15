@@ -128,10 +128,10 @@ export async function getAllPotlukks():Promise<Potlukk[]>{
         }
       }`;
     
-    const requestBody: string = JSON.stringify(query);
+    const requestBody: string = JSON.stringify({query});
     const httpResponse = await fetch("http://127.0.0.1:8000/graphql", {method:"POST", body:requestBody, headers:{'Content-Type':"application/json"}});
     const responseBody = await httpResponse.json();
     console.log(responseBody);
-    const potlukk = responseBody.data;
+    const potlukk = responseBody.data.potlukks;
     return potlukk;
 }

@@ -52,7 +52,7 @@ export function HostedPotlukksList(props: HostedPotlukksProps) {
     
         <h2>Hosted Potlukks</h2>
         <ul>
-            {props.potlukks.filter(p => p.host.userId===props.hostId).map(p => <li key={p.potlukkId}><Link to="">{p.details.title}</Link> </li>)}
+            {props.potlukks.filter(p => p.host.userId===props.hostId).map(p => <li key={p.potlukkId}><Link to={`/potlukkinfohost/${p.potlukkId}`}>{p.details.title}</Link> </li>)}
         </ul>
     
     </>

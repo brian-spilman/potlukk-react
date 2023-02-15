@@ -1,6 +1,9 @@
+import { useParams } from "react-router";
 import { NavBar } from "../component/navbar";
 
 export function PotlukkDetailsHostPage() {
+
+    let {potlukkID} = useParams(); 
 
     return <>
 
