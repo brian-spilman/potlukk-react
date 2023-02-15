@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import { getAllPotlukks } from "../api/lukker-requests";
 import { HostedPotlukksList } from "../component/hosted-potlukks-list";
+import { InvitedPotlukksList } from "../component/invited-potlukks-list";
 import { LukkerInfo } from "../component/lukker-info";
 import { NavBar } from "../component/navbar";
 
@@ -25,6 +26,8 @@ export function HomePage() {
         <h1>Home Page</h1>
 
         <HostedPotlukksList hostId={Number(localStorage.getItem("userId"))} potlukks={data}/>
+
+        <InvitedPotlukksList potlukks={data}/>
 
     </>
 }
