@@ -1,3 +1,4 @@
+import { Potlukk } from "../component/hosted-potlukks-list";
 import { PotlukkCreationInput } from "../pages/host-page";
 import { Lukker, PotLukkerRegistrationDetails } from "../reducers/registration-reducer";
 
@@ -83,6 +84,54 @@ export async function sendInvite(newInvite: InvitationSendInput):Promise<Potlukk
     const requestBody: string = JSON.stringify({query, variables});
     const httpResponse = await fetch("http://127.0.0.1:8000/graphql", {method:"POST", body:requestBody, headers:{'Content-Type':"application/json"}});
     const responseBody = await httpResponse.json();
+    const potlukk = responseBody.data;
+    return potlukk;
+}
+
+export async function getAllPotlukks():Promise<Potlukk[]>{
+    const query = `query getPotlukks{
+        potlukks{
+          potlukkId
+          details{
+            title
+            location
+            status
+            description
+            isPublic
+            time
+            tags
+          }
+          host{
+            userId
+            username
+            fname
+            lname
+            allergies
+          }
+          invitations{
+            status
+            potlukker{
+              userId
+              username
+              fname
+              lname
+              allergies
+            }
+          }
+          dishes{
+            name
+            description
+            broughtBy
+            serves
+            allergens
+          }
+        }
+      }`;
+    
+    const requestBody: string = JSON.stringify(query);
+    const httpResponse = await fetch("http://127.0.0.1:8000/graphql", {method:"POST", body:requestBody, headers:{'Content-Type':"application/json"}});
+    const responseBody = await httpResponse.json();
+    console.log(responseBody);
     const potlukk = responseBody.data;
     return potlukk;
 }
