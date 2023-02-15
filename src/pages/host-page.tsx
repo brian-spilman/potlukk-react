@@ -8,9 +8,25 @@ import { InvitationState, inviteLukkerReducer } from "../reducers/invited-lukker
 import { BasicLukker } from "../component/invited-lukker-list";
 import { PotlukkCreationState, PotlukkDetails, potlukkHostReducer } from '../reducers/potlukk-host-reducer'
 import { useNavigate } from "react-router-dom";
+import { createPotlukk, sendInvite } from "../api/lukker-requests";
 
 export type SearchForm = {
     username: string
+}
+
+export type PotlukkCreationInput = {
+    details: PotlukkDetailsCreationInput,
+    hostId: number
+}
+
+export type PotlukkDetailsCreationInput = {
+    title: string,
+    location: string,
+    status: "SCHEDULED" | "CANCELLED" | "",
+    description: string,
+    isPublic: boolean,
+    time: number,
+    tags: string[]
 }
 
 const initialState: InvitationState = {
@@ -27,6 +43,8 @@ const initialPotlukkState: PotlukkCreationState = {
     // tags: []
 }
 
+
+
 export function HostPage() {
 
     const navigate = useNavigate();
@@ -39,29 +57,30 @@ export function HostPage() {
 
     async function submitData(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        let potlukk: PotlukkDetails = {
-            title: "",
-            location: "",
-            status: "",
-            description: "",
-            isPublic: false,
-            time: 0,
+        let potlukk: PotlukkCreationInput = {
+            details: {
+                title: potlukkCreationState.title,
+                location: potlukkCreationState.location,
+                status: "SCHEDULED",
+                description: potlukkCreationState.description,
+                isPublic: potlukkCreationState.isPublic,
+                time: potlukkCreationState.time,
+                tags: []
+            },
+            hostId: Number(localStorage.getItem("userId"))
         }
-        potlukk.title = potlukkCreationState.title;
-        potlukk.location = potlukkCreationState.location;
-        potlukk.status = "SCHEDULED";
-        potlukk.description = potlukkCreationState.description;
-        potlukk.isPublic = potlukkCreationState.isPublic;
-        potlukk.time = potlukkCreationState.time;
 
-        const returnPotlukk = createPotlukk(potlukk);
-        localStorage.setItem("title", potlukk.title)
+        let returnPotlukk = await createPotlukk(potlukk);
+        console.log(returnPotlukk.potlukkId);
+        console.log(returnPotlukk.details.title);
+
+        inviteState.invitedLukkers.map(async (luk) => sendInvite({potlukkId: returnPotlukk.potlukkId, potlukkerId:luk.userId}));
+
         navigate("/home");
     }
     return <>
 
         <NavBar />
-
 
         <h1>Host Page</h1>
         <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
@@ -69,7 +88,7 @@ export function HostPage() {
             <label htmlFor="title">Title</label>
             <input id="title" type="text" onChange={e => dispatchPotlukk({ type: "SET_TITLE", payload: e.target.value })} required />
 
-            <input type='datetime-local' onChange={e => dispatchPotlukk({ type: "SET_TIME", payload: Date.parse(e.target.value) })} required />
+            <input type='datetime-local' onChange={e => dispatchPotlukk({ type: "SET_TIME", payload: ((Date.parse(e.target.value))/1000) })} required />
 
             <label htmlFor="location">Location</label>
             <input type="text" onChange={e => dispatchPotlukk({ type: "SET_LOCATION", payload: e.target.value })} required />

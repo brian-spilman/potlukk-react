@@ -19,7 +19,7 @@ export function InvitedLukkerList(props: InvitedLukkerProps) {
         <h1>Invited Lukkers: </h1>
     
         <ul>
-            {props.invitedLukkers.map(luk => <li>{luk.username} {luk.fname} {luk.lname} 
+            {props.invitedLukkers.map(luk => <li key={luk.userId}>{luk.username} {luk.fname} {luk.lname} 
             <button onClick={() => props.dispatch({type: "REVOKE_INVITE", payload: luk.userId})}>Remove</button></li>)}
         </ul>
     

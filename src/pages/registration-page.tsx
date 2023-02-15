@@ -45,6 +45,8 @@ export function RegistrationPage() {
             const returnLukker = createLukker(lukker);
 
             localStorage.setItem("username", lukker.username);
+            localStorage.setItem("userId", (await returnLukker).userId.toString());
+
 
             navigate("/home");
         }else{

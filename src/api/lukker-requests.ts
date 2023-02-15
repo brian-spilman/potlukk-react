@@ -1,8 +1,21 @@
+import { PotlukkCreationInput } from "../pages/host-page";
 import { Lukker, PotLukkerRegistrationDetails } from "../reducers/registration-reducer";
 
 export type SignInLukker = {
     username: string,
     password: string
+}
+
+export type PotlukkCreationReturn = {
+    potlukkId: number,
+    details: {
+        title: string
+    }
+}
+
+export type InvitationSendInput = {
+    potlukkId: number,
+    potlukkerId: number
 }
 
 export async function getLukkers(): Promise<Lukker[]>{
@@ -36,4 +49,40 @@ export async function signInLukker(lukkerVerify: SignInLukker): Promise<Lukker> 
 
     const lukker:Lukker = await httpResponse.json();
     return lukker;
+}
+
+export async function createPotlukk(newPotlukkInput: PotlukkCreationInput):Promise<PotlukkCreationReturn>{
+    const query = `mutation createPotlukk($newPotlukk: PotlukkCreationInput!){
+        createPotlukk(input:$newPotlukk){
+          potlukkId
+            details{
+            title
+          }
+        }
+    }`;
+    
+    const variables = {newPotlukk:newPotlukkInput};
+    const requestBody: string = JSON.stringify({query, variables});
+    const httpResponse = await fetch("http://127.0.0.1:8000/graphql", {method:"POST", body:requestBody, headers:{'Content-Type':"application/json"}});
+    const responseBody = await httpResponse.json();
+    const freshPotlukk = responseBody.data.createPotlukk;
+    return freshPotlukk;
+}
+
+export async function sendInvite(newInvite: InvitationSendInput):Promise<PotlukkCreationReturn>{
+    const query = `mutation sendInvite($inviteInput: InvitationSendInput!){
+        sendInvite(input: $inviteInput){
+          potlukkId
+          details{
+            title
+          }
+        }
+      }`;
+    
+    const variables = {inviteInput:newInvite};
+    const requestBody: string = JSON.stringify({query, variables});
+    const httpResponse = await fetch("http://127.0.0.1:8000/graphql", {method:"POST", body:requestBody, headers:{'Content-Type':"application/json"}});
+    const responseBody = await httpResponse.json();
+    const potlukk = responseBody.data;
+    return potlukk;
 }
