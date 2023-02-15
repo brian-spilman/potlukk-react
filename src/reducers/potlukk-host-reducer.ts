@@ -1,18 +1,18 @@
-export type PotLukk = {
-    time: string,
-    location: string,
-    description: string,
-    isPublic: boolean
-}
+// export type PotLukk = {
+//     time: string,
+//     location: string,
+//     description: string,
+//     isPublic: boolean
+// }
 
 export type PotlukkDetails = {
     title: string,
     location: string,
-    status: PotlukkStatus,
+    status: "SCHEDULED" | "CANCELLED" | "",
     description: string,
     isPublic: boolean,
     time: number,
-    tags: string[]
+    // tags: string[]
 }
 
 export type PotlukkStatus = {
@@ -27,7 +27,7 @@ export type PotlukkCreationState = {
     description: string,
     isPublic: boolean,
     time: number,
-    tags: string[]
+    // tags: string[]
 }
 
 export type SetPotlukkTitleAction = { type: "SET_TITLE", payload: string};
@@ -36,11 +36,11 @@ export type SetPotlukkLocationAction = { type: "SET_LOCATION", payload: string }
 export type SetPotlukkDescriptionAction = { type: "SET_DESCRIPTION", payload: string };
 export type SetPotlukkPublic = { type: "SET_PUBLIC", payload: boolean };
 // export type SetPotlukkTag = { type: "SET_TAG", payload: string[]};
-export type AddPotlukk = { type: "ADD_POTLUKK" };
+// export type AddPotlukk = { type: "ADD_POTLUKK" };
 
 export type PotlukkCreationAction = SetPotlukkTitleAction | SetPotlukkTimeAction | SetPotlukkLocationAction |
-    SetPotlukkDescriptionAction | SetPotlukkPublic | AddPotlukk
-   // SetPotlukkTag 
+    SetPotlukkDescriptionAction | SetPotlukkPublic 
+   // SetPotlukkTag | AddPotlukk
 
 const initialState: PotlukkCreationState = {
     title: "",
@@ -49,7 +49,7 @@ const initialState: PotlukkCreationState = {
     description: "",
     isPublic: false,
     time: 0,
-    tags: []
+    // tags: []
 }
 
 export function potlukkHostReducer(state: PotlukkCreationState = initialState, action: PotlukkCreationAction) {
@@ -82,10 +82,10 @@ export function potlukkHostReducer(state: PotlukkCreationState = initialState, a
         //     nextState.tags.push()
         //     return nextState;
         // }
-        case "ADD_POTLUKK": {
-            alert("Potlukk successfully created!");
-            return nextState;
-        }
+        // case "ADD_POTLUKK": {
+        //     alert("Potlukk successfully created!");
+        //     return nextState;
+        // }
 
     }
 
