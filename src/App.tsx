@@ -1,14 +1,22 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import createSagaMiddleware from '@redux-saga/core';
 import { HomePage } from './pages/home-page';
 import { HostPage } from './pages/host-page';
 import { PotlukkDetailsGuestPage } from './pages/potlukk-details-guest-page';
 import { PotlukkDetailsHostPage } from './pages/potlukk-details-host-page';
 import { RegistrationPage } from './pages/registration-page';
 import { SignInPage } from './pages/sign-in-page';
+import { bringDishReducer } from './reducers/bring-dish-reducer';
+import { applyMiddleware, createStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import { rootSaga } from './sagas/dish-sagas';
 
 const queryClient = new QueryClient();
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(bringDishReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(rootSaga);
 
 function App() {
 
@@ -16,6 +24,7 @@ function App() {
 
   return <>
     <h1>Potlukk Website!</h1>
+    <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
@@ -29,6 +38,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </QueryClientProvider>
+    </Provider>
   </>
 }
 

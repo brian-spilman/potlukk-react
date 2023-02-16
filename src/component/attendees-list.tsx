@@ -11,8 +11,8 @@ export function AttendeesList(props: AttendeesListProps) {
 
         <h2>Attendees: </h2>
         <ul>
-            {props.attendees.map(a => <li>{a.potlukker.fname} {a.potlukker.lname} {props.isGuest ? <></> : <b>{a.status}</b>}</li>)}
-        </ul>
+            {props.attendees.map(a => <li key={a.potlukker.userId}>{a.potlukker.fname} {a.potlukker.lname} {props.isGuest ? <></> : <b>{a.status}</b>}</li>)}
+        </ul>   
     
     </>
 
