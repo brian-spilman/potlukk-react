@@ -57,6 +57,15 @@ export function HostPage() {
 
     async function submitData(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
+        // insert confirmation here
+        // useState?
+        //modal?????
+
+        // if(!confirmed){
+        //     return;
+        // }
+
         let potlukk: PotlukkCreationInput = {
             details: {
                 title: potlukkCreationState.title,
