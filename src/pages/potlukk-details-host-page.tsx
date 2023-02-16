@@ -57,7 +57,7 @@ export function PotlukkDetailsHostPage() {
 
         <button onClick={() => {setOpenModal(true)}}>Bring Dish</button>
         {/* if openModal is equal to true then DishModal component will render */}
-        {openModal && <DishModal />}
+        {openModal && <DishModal setOpenModal={setOpenModal}/>}
 
         <button>Request Dish</button>
 

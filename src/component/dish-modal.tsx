@@ -1,5 +1,5 @@
 import { stringify } from "querystring";
-import { FormEvent, useReducer, useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { bringDishReducer, DishState } from "../reducers/bring-dish-reducer";
 
@@ -10,16 +10,15 @@ const initialState: DishState = {
     allergens: []
 }
 
-export function DishModal() {
+export function DishModal({setOpenModal}: {setOpenModal: any}) {
 
-    const navigate = useNavigate();
 
     const [dishState, dispatch] = useReducer(bringDishReducer, initialState);
 
     async function submitData(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        alert(`${dishState.name} successfully added`)
-        navigate("/potlukkinfoguest/potlukkID")
+        alert(`${dishState.name} successfully added to potlukk!`)
+        setOpenModal(false);
     }
     
     return <div>
@@ -47,6 +46,7 @@ export function DishModal() {
             <input id="nutBox" type="checkbox" value="treeNuts" onChange={e => dispatch({ type: "SET_ALLERGEN", payload: "TREE NUTS" })} />
 
             <button type="submit">Complete</button>
+            
         </form>
 
     </div>
