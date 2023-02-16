@@ -3,8 +3,12 @@ import { useParams } from "react-router";
 import { getAllPotlukks } from "../api/lukker-requests";
 import { AttendeesList } from "../component/attendees-list";
 import { NavBar } from "../component/navbar";
+import { DishModal } from "../component/dish-modal";
+import { useState } from "react";
 
 export function PotlukkDetailsHostPage() {
+
+    const [openModal, setOpenModal] = useState(false);
 
     let {potlukkID} = useParams(); 
 
@@ -51,7 +55,10 @@ export function PotlukkDetailsHostPage() {
             </tr>
         </table>
 
-        <button>Bring Dish</button>
+        <button onClick={() => {setOpenModal(true)}}>Bring Dish</button>
+        {/* if openModal is equal to true then DishModal component will render */}
+        {openModal && <DishModal />}
+
         <button>Request Dish</button>
 
         <AttendeesList attendees={myPotlukk.invitations} isGuest={false} />

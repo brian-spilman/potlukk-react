@@ -10,7 +10,7 @@ const initialState: DishState = {
     allergens: []
 }
 
-export function bringDish() {
+export function DishModal() {
 
     const navigate = useNavigate();
 
@@ -21,34 +21,34 @@ export function bringDish() {
         alert(`${dishState.name} successfully added`)
         navigate("/potlukkinfoguest/potlukkID")
     }
-
-    return <>
+    
+    return <div>
         <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
 
             <h2>Bring/Edit Dish</h2>
 
             <label htmlFor="name">Name</label>
-            <input id="name" type="text" required onChange={e => dispatch({type:"SET_NAME", payload:e.target.value})}/>
+            <input id="name" type="text" required onChange={e => dispatch({ type: "SET_NAME", payload: e.target.value })} />
 
             <label htmlFor="description">Description</label>
-            <input id="description" type="text" required onChange={e => dispatch({type:"SET_DESCRIPTION", payload:e.target.value})}/>
+            <input id="description" type="text" required onChange={e => dispatch({ type: "SET_DESCRIPTION", payload: e.target.value })} />
 
             <label htmlFor="servings">Serves</label>
-            <input id="servings" type="number" required onChange={e => dispatch({type:"SET_SERVINGS", payload:Number(e.target.value)})}/>
+            <input id="servings" type="number" required onChange={e => dispatch({ type: "SET_SERVINGS", payload: Number(e.target.value) })} />
 
             <h4>Allergens:</h4>
             <label htmlFor="milkBox">Milk</label>
-            <input id="milkBox" type="checkbox" value="milk" onChange={e => dispatch({type:"SET_ALLERGEN", payload:"MILK"})}/>
+            <input id="milkBox" type="checkbox" value="milk" onChange={e => dispatch({ type: "SET_ALLERGEN", payload: "MILK" })} />
             <label htmlFor="eggBox">Egg</label>
-            <input id="eggBox" type="checkbox" value="egg" onChange={e => dispatch({type:"SET_ALLERGEN", payload:"EGG"})}/>
+            <input id="eggBox" type="checkbox" value="egg" onChange={e => dispatch({ type: "SET_ALLERGEN", payload: "EGG" })} />
             <label htmlFor="soyBox">Soy</label>
-            <input id="soyBox" type="checkbox" value="soy" onChange={e => dispatch({type:"SET_ALLERGEN", payload:"SOY"})}/>
+            <input id="soyBox" type="checkbox" value="soy" onChange={e => dispatch({ type: "SET_ALLERGEN", payload: "SOY" })} />
             <label htmlFor="nutBox">Tree Nuts</label>
-            <input id="nutBox" type="checkbox" value="treeNuts" onChange={e => dispatch({type:"SET_ALLERGEN", payload:"TREE NUTS"})}/>
+            <input id="nutBox" type="checkbox" value="treeNuts" onChange={e => dispatch({ type: "SET_ALLERGEN", payload: "TREE NUTS" })} />
 
             <button type="submit">Complete</button>
         </form>
 
-    </>
+    </div>
 
 }
