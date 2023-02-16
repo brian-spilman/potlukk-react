@@ -47,10 +47,10 @@ export function RegistrationPage() {
             localStorage.setItem("username", lukker.username);
             localStorage.setItem("userId", (await returnLukker).userId.toString());
 
-
+            alert("Success\n You are registered!");
             navigate("/home");
-        }else{
-            alert("Passwords incorrect");
+        } else {
+            alert("Oops\nYour passwords do not match");
         }
 
     }
