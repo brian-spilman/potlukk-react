@@ -11,6 +11,7 @@ export function DishList(props: DishListProps){
     const dispatch = useDispatch()<DishAction>
 
     console.log("Inside DishList: " );
+    console.log(typeof dishes);
     console.log(dishes);
 
     return <>

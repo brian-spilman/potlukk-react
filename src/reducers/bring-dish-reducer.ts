@@ -71,6 +71,7 @@ export function bringDishReducer(state: DishState = initialState, action: DishAc
             return nextState;
         }
         case "SET_DISHES": {
+            console.log(action.payload);
             nextState.dishes = action.payload;
             return nextState;
         }
