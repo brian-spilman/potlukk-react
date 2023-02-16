@@ -90,7 +90,7 @@ export function RegistrationPage() {
             <label htmlFor="soyBox">Soy</label>
             <input id="soyBox" type="checkbox" value="soy" onChange={e => dispatch({type:"SET_ALLERGY", payload:"SOY"})}></input>
             <label htmlFor="nutBox">Tree Nuts</label>
-            <input id="nutBox" type="checkbox" value="treeNuts" onChange={e => dispatch({type:"SET_ALLERGY", payload:"TREE NUTS"})}></input>
+            <input id="nutBox" type="checkbox" value="treeNuts" onChange={e => dispatch({type:"SET_ALLERGY", payload:"TREE_NUT"})}></input>
 
             <hr />
 
