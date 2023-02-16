@@ -1,4 +1,4 @@
-import { Potlukk } from "../component/hosted-potlukks-list";
+import { Dish, Potlukk } from "../component/hosted-potlukks-list";
 import { PotlukkCreationInput } from "../pages/host-page";
 import { Lukker, PotLukkerRegistrationDetails } from "../reducers/registration-reducer";
 
@@ -18,6 +18,8 @@ export type InvitationSendInput = {
     potlukkId: number,
     potlukkerId: number
 }
+
+
 
 export async function getLukkers(): Promise<Lukker[]>{
 
@@ -134,4 +136,58 @@ export async function getAllPotlukks():Promise<Potlukk[]>{
     console.log(responseBody);
     const potlukk = responseBody.data.potlukks;
     return potlukk;
+}
+
+export async function saveDishes(dishes: Dish[], potlukkId: number): Promise<Potlukk> {
+  const query = `mutation addDishes($dishesInput: DishesSwapInput!){
+    swapPotlukkDishes(input: $dishesInput){
+      potlukkId
+      details{
+        title
+        location
+        status
+        description
+        isPublic
+        time
+        tags
+      }
+      host{
+        userId
+        username
+        fname
+        lname
+        allergies
+      }
+      invitations{
+        status
+        potlukker{
+          userId
+          username
+          fname
+          lname
+          allergies
+        }
+      }
+      dishes{
+        name
+        description
+        broughtBy
+        serves
+        allergens
+      }
+    }
+  }`
+
+  const variables = {dishesInput:{dishes:dishes, potlukkId: potlukkId }};
+
+  console.log(potlukkId);
+  console.log(dishes);
+
+  const requestBody = JSON.stringify({query,variables});
+  const httpResponse = await fetch("http://127.0.0.1:8000/graphql", {method:"POST", body:requestBody, headers:{"Content-Type":"application/json"}});
+  const responseBody = await httpResponse.json();
+  //console.log(responseBody);
+  const potlukk: Potlukk = responseBody.data.swapPotlukkDishes;
+  //console.log(potlukk.dishes);
+  return potlukk;
 }

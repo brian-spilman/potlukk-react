@@ -5,6 +5,9 @@ import { AttendeesList } from "../component/attendees-list";
 import { NavBar } from "../component/navbar";
 import { DishModal } from "../component/dish-modal";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { DishAction, DishState } from "../reducers/bring-dish-reducer";
+import { DishList } from "../component/dish-list";
 
 export function PotlukkDetailsHostPage() {
 
@@ -47,13 +50,15 @@ export function PotlukkDetailsHostPage() {
         <button>Edit</button>
         <button>Cancel</button>
 
-        <table>
+        {/* <table>
             <tr><thead><th>Dishes</th></thead></tr>
             <tr>
 
                 <td><button>Edit</button></td>
             </tr>
-        </table>
+        </table> */}
+
+        <DishList potlukkId={Number(potlukkID)}/>
 
         <button onClick={() => {setOpenModal(true)}}>Bring Dish</button>
         {/* if openModal is equal to true then DishModal component will render */}

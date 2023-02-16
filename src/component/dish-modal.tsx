@@ -1,23 +1,47 @@
 import { stringify } from "querystring";
 import { Dispatch, FormEvent, SetStateAction, useReducer, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { bringDishReducer, DishState } from "../reducers/bring-dish-reducer";
+import { bringDishReducer, DishAction, DishState } from "../reducers/bring-dish-reducer";
+
+export type DishForm = {
+    name: string,
+    description: string,
+    broughtBy: number,
+    serves: number,
+    allergens: string[]
+}
 
 const initialState: DishState = {
-    name: "",
-    description: "",
-    servings: 0,
-    allergens: []
+    dishes: [],
+    dish: {
+        name: "",
+        description: "",
+        broughtBy: 0,
+        serves: 0,
+        allergens: []
+    }
 }
 
 export function DishModal({setOpenModal}: {setOpenModal: any}) {
 
 
     const [dishState, dispatch] = useReducer(bringDishReducer, initialState);
+    //const [form, setForm] = useState<DishForm>(initialState)
+    const dispatch2 = useDispatch()<DishAction>;
+
+    // event: FormEvent<HTMLFormElement>
+    //(e: FormEvent<HTMLFormElement>) => submitData(e)
 
     async function submitData(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        alert(`${dishState.name} successfully added to potlukk!`)
+
+        //console.log(dishState.dish);
+        
+        console.log("In dish submit function");
+        dispatch2({type:"CREATE_DISH_FROM_FORM", payload: dishState.dish});
+
+        //alert(`${dishState.dish.name} successfully added to potlukk!`)
         setOpenModal(false);
     }
     
@@ -27,13 +51,13 @@ export function DishModal({setOpenModal}: {setOpenModal: any}) {
             <h2>Bring/Edit Dish</h2>
 
             <label htmlFor="name">Name</label>
-            <input id="name" type="text" required onChange={e => dispatch({ type: "SET_NAME", payload: e.target.value })} />
+            <input id="name" type="text" required onChange={e => dispatch({type:"SET_NAME", payload:e.target.value})} />
 
             <label htmlFor="description">Description</label>
-            <input id="description" type="text" required onChange={e => dispatch({ type: "SET_DESCRIPTION", payload: e.target.value })} />
+            <input id="description" type="text" required onChange={e => dispatch({type:"SET_DESCRIPTION", payload:e.target.value})} />
 
             <label htmlFor="servings">Serves</label>
-            <input id="servings" type="number" required onChange={e => dispatch({ type: "SET_SERVINGS", payload: Number(e.target.value) })} />
+            <input id="servings" type="number" required onChange={e => dispatch({type:"SET_SERVINGS", payload:Number(e.target.value)})} />
 
             <h4>Allergens:</h4>
             <label htmlFor="milkBox">Milk</label>
@@ -43,7 +67,7 @@ export function DishModal({setOpenModal}: {setOpenModal: any}) {
             <label htmlFor="soyBox">Soy</label>
             <input id="soyBox" type="checkbox" value="soy" onChange={e => dispatch({ type: "SET_ALLERGEN", payload: "SOY" })} />
             <label htmlFor="nutBox">Tree Nuts</label>
-            <input id="nutBox" type="checkbox" value="treeNuts" onChange={e => dispatch({ type: "SET_ALLERGEN", payload: "TREE NUTS" })} />
+            <input id="nutBox" type="checkbox" value="treeNuts" onChange={e => dispatch({ type: "SET_ALLERGEN", payload: "TREENUT" })} />
 
             <button type="submit">Complete</button>
             
