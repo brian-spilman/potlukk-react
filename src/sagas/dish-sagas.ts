@@ -34,7 +34,7 @@ export function* updateDishes(action: RequestSaveDishesAction){
     const potlukk: Potlukk = yield saveDishes(dishes, action.payload);
     console.log("IN UPDATE DISHES");
     console.log(potlukk.dishes);
-    yield put({type:"SET_DISHES", dishes:potlukk.dishes});
+    yield put({type:"SET_DISHES", payload:potlukk.dishes});
 }
 
 export function* watchCreateFromFormData(){
