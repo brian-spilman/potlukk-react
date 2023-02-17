@@ -25,9 +25,9 @@ export function PotlukkDetailsHostPage() {
 
     const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate();
-    let {potlukkID} = useParams(); 
+    let { potlukkID } = useParams();
 
-    const {isLoading, isError, data = []} = useQuery("potlukks", getAllPotlukks);
+    const { isLoading, isError, data = [] } = useQuery("potlukks", getAllPotlukks);
     const potlukk = data.filter(p => p.potlukkId === Number(potlukkID));
     const myPotlukk = potlukk[0];
 
@@ -35,7 +35,7 @@ export function PotlukkDetailsHostPage() {
 
     const date = new Date(myPotlukk.details.time * 1000);
 
-    function quitEditing(){
+    function quitEditing() {
         navigate("/home");
     }
 
@@ -52,16 +52,49 @@ export function PotlukkDetailsHostPage() {
             tags: [],
             potlukkId: Number(potlukkID)
         }
-        if(potlukk.title===""){
+        if (potlukk.title === "") {
             potlukk.title = myPotlukk.details.title;
         }
-        if(potlukk.description===""){
+        if (potlukk.description === "") {
             potlukk.description = myPotlukk.details.description;
         }
-        if(potlukk.location===""){
+        if (potlukk.location === "") {
             potlukk.location = myPotlukk.details.location;
         }
-        if(potlukk.time===0){
+        if (potlukk.time === 0) {
+            potlukk.time = myPotlukk.details.time;
+        }
+
+        let returnPotlukk = await updatePotlukk(potlukk);
+        console.log(returnPotlukk.potlukkId);
+        console.log(returnPotlukk.details.title);
+
+        navigate("/home");
+    }
+
+    async function cancelPotlukk(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        let potlukk: PotlukkDetailsSwapInput = {
+            title: potlukkUpdateState.title,
+            location: potlukkUpdateState.location,
+            status: "CANCELLED",
+            description: potlukkUpdateState.description,
+            isPublic: potlukkUpdateState.isPublic,
+            time: potlukkUpdateState.time,
+            tags: [],
+            potlukkId: Number(potlukkID)
+        }
+        if (potlukk.title === "") {
+            potlukk.title = myPotlukk.details.title;
+        }
+        if (potlukk.description === "") {
+            potlukk.description = myPotlukk.details.description;
+        }
+        if (potlukk.location === "") {
+            potlukk.location = myPotlukk.details.location;
+        }
+        if (potlukk.time === 0) {
             potlukk.time = myPotlukk.details.time;
         }
 
@@ -73,41 +106,44 @@ export function PotlukkDetailsHostPage() {
     }
 
     return <>
-    
+
 
         <NavBar />
-        <form onSubmit={(e:FormEvent<HTMLFormElement>) => submitData(e)}>
+        <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
             <h2>Title: {myPotlukk.details.title}</h2>
-            <input type="text" placeholder="New Title" onChange={e => dispatch({ type: "SET_TITLE", payload: e.target.value })}/>
-            <hr/>
+            <input type="text" placeholder="New Title" onChange={e => dispatch({ type: "SET_TITLE", payload: e.target.value })} />
+            <hr />
             <label htmlFor="description">Description: {myPotlukk.details.description}</label>
             <hr />
-            <input type="text" placeholder="New Description" onChange={e => dispatch({ type: "SET_DESCRIPTION", payload: e.target.value })}/>
+            <input type="text" placeholder="New Description" onChange={e => dispatch({ type: "SET_DESCRIPTION", payload: e.target.value })} />
             <hr />
             <label htmlFor="location">Location: {myPotlukk.details.location}</label>
             <hr />
-            <input type="text" placeholder="New Location" onChange={e => dispatch({ type: "SET_LOCATION", payload: e.target.value })}/>
+            <input type="text" placeholder="New Location" onChange={e => dispatch({ type: "SET_LOCATION", payload: e.target.value })} />
             <hr />
             <label htmlFor="dateField">Date: {date.toString()}</label>
             <hr />
-            <input id="dateField" type='datetime-local' onChange={e => dispatch({ type: "SET_TIME", payload: ((Date.parse(e.target.value))/1000) })}/>
+            <input id="dateField" type='datetime-local' onChange={e => dispatch({ type: "SET_TIME", payload: ((Date.parse(e.target.value)) / 1000) })} />
             <hr />
             <label htmlFor="isPublic">Make Public</label>
-            <input id="isPublic" type="checkbox" onChange={e => dispatch({ type: "SET_PUBLIC", payload: e.target.checked })}/>
+            <input id="isPublic" type="checkbox" onChange={e => dispatch({ type: "SET_PUBLIC", payload: e.target.checked })} />
             <hr />
             <button type="submit">Update</button>
 
         </form>
 
-        
+
         <button onClick={quitEditing}>Quit Editing</button>
+        <form onSubmit={(e: FormEvent<HTMLFormElement>) => cancelPotlukk(e)}>
+            <button type="submit">Cancel Potlukk</button>
+        </form>
 
 
-        <DishList potlukkId={Number(potlukkID)}/>
+        <DishList potlukkId={Number(potlukkID)} />
 
-        <button onClick={() => {setOpenModal(true)}}>Bring Dish</button>
+        <button onClick={() => { setOpenModal(true) }}>Bring Dish</button>
         {/* if openModal is equal to true then DishModal component will render */}
-        {openModal && <DishModal setOpenModal={setOpenModal}/>}
+        {openModal && <DishModal setOpenModal={setOpenModal} />}
 
         <button>Request Dish</button>
 
