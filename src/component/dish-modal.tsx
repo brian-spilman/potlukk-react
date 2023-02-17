@@ -13,6 +13,8 @@ export type DishForm = {
 }
 
 const initialState: DishState = {
+    editMode: false,
+    nameForEdit: "",
     dishes: [],
     dish: {
         name: "",
@@ -41,7 +43,7 @@ export function DishModal({setOpenModal}: {setOpenModal: any}) {
         console.log("In dish submit function");
         dispatch2({type:"CREATE_DISH_FROM_FORM", payload: dishState.dish});
 
-        //alert(`${dishState.dish.name} successfully added to potlukk!`)
+        // alert(`${dishState.dish.name} successfully added to potlukk!`)
         setOpenModal(false);
     }
     
