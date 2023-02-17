@@ -100,8 +100,15 @@ export function registrationReducer(state: RegistrationState = initialState, act
 
             //checkRegex(nextState.password1);
 
+            if(!(nextState.password1.includes("!")) && !(nextState.password1.includes("@")) && !(nextState.password1.includes("#")) && !(nextState.password1.includes("$")) && !(nextState.password1.includes("*")) && !(/\d/.test(nextState.password1))){
+                console.log("Includes problem");
+                nextState.isVerified = false;
+                return nextState;
+            }
+
             if (nextState.password1 !== nextState.password2) {
                 //alert("Passwords don't match! Fix and try again.");
+                console.log("Matching problem");
                 nextState.isVerified = false;
                 return nextState;
             }
