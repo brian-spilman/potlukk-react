@@ -10,7 +10,8 @@ const initialState: RegistrationState = {
     fname: "",
     lname: "",
     allergies: [],
-    isVerified: false
+    isVerified: false,
+    passwordStatus: "",
 }
 
 export function RegistrationPage() {
@@ -18,16 +19,6 @@ export function RegistrationPage() {
     const navigate = useNavigate();
 
     const [registrationState, dispatch] = useReducer(registrationReducer, initialState);
-
-    // function pwValidator(password: string): boolean {
-
-    //     const passwordValidation = "?=.*[*.!@$%^&?~\]{9,}"
-    //     if(password.match(passwordValidation) ){
-    //         //alert("Password must be at least 10 characters.");
-    //         return false;
-    //     }
-    //     return true;
-    // }
 
     async function submitData(event:FormEvent<HTMLFormElement>){
 
@@ -47,10 +38,10 @@ export function RegistrationPage() {
             localStorage.setItem("username", lukker.username);
             localStorage.setItem("userId", (await returnLukker).userId.toString());
 
-            alert("Success\n You are registered!");
+            alert(registrationState.passwordStatus);
             navigate("/home");
         } else {
-            alert("Oops\nPasswords issues!!");
+            alert(registrationState.passwordStatus)
         }
 
     }
