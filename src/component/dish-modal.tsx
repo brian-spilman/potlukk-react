@@ -2,7 +2,7 @@ import { stringify } from "querystring";
 import { Dispatch, FormEvent, SetStateAction, useReducer, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { bringDishReducer, DishAction, DishState } from "../../reducers/bring-dish-reducer";
+import { bringDishReducer, DishAction, DishState } from "../reducers/bring-dish-reducer";
 
 export type DishForm = {
     name: string,
