@@ -10,7 +10,8 @@ test("SET_USERNAME", ()=>{
         fname: "",
         lname: "",
         allergies: [],
-        isVerified: false
+        isVerified: false,
+        passwordStatus: ""
     };
 
     const nextState = registrationReducer(registrationState, {type:"SET_USERNAME", payload:"JohnDoe24"});
@@ -25,7 +26,8 @@ test("SET_PASSWORD_ONE", ()=>{
         fname: "",
         lname: "",
         allergies: [],
-        isVerified: false
+        isVerified: false,
+        passwordStatus: ""
     };
 
     const nextState = registrationReducer(registrationState, {type:"SET_PASSWORD_ONE", payload:"abcdefghi$"});
@@ -40,7 +42,8 @@ test("SET_PASSWORD_TWO", ()=>{
         fname: "",
         lname: "",
         allergies: [],
-        isVerified: false
+        isVerified: false,
+        passwordStatus: ""
     };
 
     const nextState = registrationReducer(registrationState, {type:"SET_PASSWORD_TWO", payload:"abcdefghi$"});
@@ -55,7 +58,8 @@ test("SET_FIRST_NAME", ()=>{
         fname: "",
         lname: "",
         allergies: [],
-        isVerified: false
+        isVerified: false,
+        passwordStatus: ""
     };
 
     const nextState = registrationReducer(registrationState, {type:"SET_FIRST_NAME", payload:"John"});
@@ -70,7 +74,8 @@ test("SET_LAST_NAME", ()=>{
         fname: "John",
         lname: "",
         allergies: [],
-        isVerified: false
+        isVerified: false,
+        passwordStatus: ""
     };
 
     const nextState = registrationReducer(registrationState, {type:"SET_LAST_NAME", payload:"Doe"});
@@ -85,7 +90,8 @@ test("SET_ALLERGY_ADD", ()=>{
         fname: "John",
         lname: "Doe",
         allergies: ["MILK", "SOY"],
-        isVerified: false
+        isVerified: false,
+        passwordStatus: ""
     };
 
     const nextState = registrationReducer(registrationState, {type:"SET_ALLERGY", payload:"Egg"});
@@ -102,7 +108,8 @@ test("SET_ALLERGY_REMOVE", ()=>{
         fname: "John",
         lname: "Doe",
         allergies: ["MILK", "SOY"],
-        isVerified: false
+        isVerified: false,
+        passwordStatus: ""
     };
 
     const nextState = registrationReducer(registrationState, {type:"SET_ALLERGY", payload:"milk"});
@@ -119,7 +126,8 @@ test("VERIFY_LUKKER_TRUE", ()=>{
         fname: "John",
         lname: "Doe",
         allergies: ["MILK", "SOY"],
-        isVerified: false
+        isVerified: false,
+        passwordStatus: ""
     };
 
     const nextState = registrationReducer(registrationState, {type:"SET_ALLERGY", payload:"milk"});

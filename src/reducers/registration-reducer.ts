@@ -2,6 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { createLukker } from "../api/lukker-requests";
 
+
+export type PasswordStatus = {
+    message: "Registration successful!" | "Your password must contain at least one special character or number!" | 
+    "Your password must have at least 10 characters!" | "Your passwords do not match!"
+}
+
 export type Lukker = {
     userId: number,
     username: string,
@@ -24,7 +30,9 @@ export type RegistrationState = {
     fname: string,
     lname: string,
     allergies: string[],
-    isVerified: boolean
+    isVerified: boolean,
+    passwordStatus: "Registration successful!" | "Your password must contain at least one special character or number!" | 
+    "Your password must have at least 10 characters!" | "Your passwords do not match!" | ""
 };
 
 export type SetLukkerUsernameAction = { type: "SET_USERNAME", payload: string };
@@ -44,7 +52,8 @@ const initialState: RegistrationState = {
     fname: "",
     lname: "",
     allergies: [],
-    isVerified: false
+    isVerified: false,
+    passwordStatus: ""
 }
 
 export function registrationReducer(state: RegistrationState = initialState, action: RegistrationAction): RegistrationState {
@@ -85,54 +94,29 @@ export function registrationReducer(state: RegistrationState = initialState, act
             return nextState;
         }
         case "VERIFY_LUKKER": {
-            // if(nextState.password1.length < 10){
-            //     alert("Password must be at least 10 characters.")
-            // }
 
-            //console.log("Right here");
-
-            // const passwordValidation = /(?=^.{10,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"/;
-            // const passwordValidation = /[A-Za-z0-9][\!\@\#\$\*]+{10,}/;
-            // // const passwordValidation = /^{10,}(?=.*[A-Za-z])(?=.*[0-9\!\@\#\$\*]+)$/
-            // if(!(nextState.password1.match(passwordValidation))){
-            //     return nextState;
-            // }
-
-            //checkRegex(nextState.password1);
-
-            if(!(nextState.password1.includes("!")) && !(nextState.password1.includes("@")) && !(nextState.password1.includes("#")) && !(nextState.password1.includes("$")) && !(nextState.password1.includes("*")) && !(/\d/.test(nextState.password1))){
-                console.log("Includes problem");
+            if (nextState.password1.length < 10) {
                 nextState.isVerified = false;
+                nextState.passwordStatus = "Your password must have at least 10 characters!";
+                return nextState;
+            }
+            
+            if(!(nextState.password1.includes("!")) && !(nextState.password1.includes("@")) && !(nextState.password1.includes("#")) && !(nextState.password1.includes("$")) && !(nextState.password1.includes("*")) && !(/\d/.test(nextState.password1))){
+                nextState.isVerified = false;
+                nextState.passwordStatus = "Your password must contain at least one special character or number!";
                 return nextState;
             }
 
             if (nextState.password1 !== nextState.password2) {
-                //alert("Passwords don't match! Fix and try again.");
-                console.log("Matching problem");
                 nextState.isVerified = false;
+                nextState.passwordStatus = "Your passwords do not match!";
                 return nextState;
             }
 
             nextState.isVerified = true;
-
+            nextState.passwordStatus = "Registration successful!";
             return nextState;
-
-            // figure out how to change from registration page to 
-            // navigate("/home");
-
         }
 
     }
-
-    // function checkRegex(password1: string) {
-    //     const checkSpecial = /[0-9*@!#%&~]+/.test(state.password1)
-    //     let valid = false;
-    //     if (!checkSpecial && nextState.password1.length >= 10) {
-    //         valid = true;
-    //         return nextState;
-    //     } else {
-    //         valid = false;
-    //         return nextState;
-    //     }
-    // }
 }
