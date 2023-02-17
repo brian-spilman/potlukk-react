@@ -14,8 +14,9 @@ export function NavBar(){
 
     return <>
 
-        <h3>Welcome {localStorage.getItem("username")}</h3>
+        <h2>Welcome {localStorage.getItem("username")}</h2>
     
+        <h3>Navigation:</h3>
         <ul>
             <li><Link to="/home">Home</Link></li>
             <li><Link to="/host">Host</Link></li>
