@@ -2,7 +2,9 @@ import { DishForm } from "../component/dish-modal";
 
 export type DishState = {
     dishes: Dish[],
-    dish: DishForm
+    dish: DishForm,
+    editMode: boolean,
+    nameForEdit: string
 }
 
 export type Dish = {
@@ -18,15 +20,18 @@ export type SetDishDescription = { type: "SET_DESCRIPTION", payload: string };
 export type SetDishServings = { type: "SET_SERVINGS", payload: number };
 export type SetDishAllergens = { type: "SET_ALLERGEN", payload: string };
 export type AddDishAction = {type:"ADD_DISH", payload: Dish}
+export type DeleteDishAction = {type: "DELETE_DISH", payload: string}
 export type SetDishesAction = {type:"SET_DISHES", payload: Dish[]};
 
 export type CreateDishFromFormAction = {type:"CREATE_DISH_FROM_FORM", payload: DishForm};
 export type RequestPopulateDishesAction = {type:"REQUEST_POPULATE_DISHES", payload: number};
 export type RequestSaveDishesAction = {type:"REQUEST_SAVE_DISHES", payload: number};
 
-export type DishAction = SetDishNameAction | SetDishDescription | SetDishServings | AddDishAction | SetDishAllergens | SetDishesAction | CreateDishFromFormAction | RequestPopulateDishesAction | RequestSaveDishesAction;
+export type DishAction = SetDishNameAction | SetDishDescription | SetDishServings | AddDishAction | DeleteDishAction | SetDishAllergens | SetDishesAction | CreateDishFromFormAction | RequestPopulateDishesAction | RequestSaveDishesAction;
 
 const initialState: DishState = {
+    editMode: false,
+    nameForEdit: "",
     dishes: [],
     dish: {
         name: "",
@@ -68,6 +73,10 @@ export function bringDishReducer(state: DishState = initialState, action: DishAc
         case "ADD_DISH":{
             console.log("Add Dish in Reducer");
             nextState.dishes.push(action.payload);
+            return nextState;
+        }
+        case "DELETE_DISH": {
+            nextState.dishes = nextState.dishes.filter(dish => dish.name !== action.payload);
             return nextState;
         }
         case "SET_DISHES": {
