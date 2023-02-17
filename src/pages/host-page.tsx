@@ -9,6 +9,7 @@ import { BasicLukker } from "../component/invited-lukker-list";
 import { PotlukkCreationState, PotlukkDetails, potlukkHostReducer } from '../reducers/potlukk-host-reducer'
 import { useNavigate } from "react-router-dom";
 import { createPotlukk, sendInvite } from "../api/lukker-requests";
+import { PotlukkConfirmationModal } from "../component/potlukk-confirmation-modal";
 
 export type SearchForm = {
     username: string
@@ -47,6 +48,7 @@ const initialPotlukkState: PotlukkCreationState = {
 
 export function HostPage() {
 
+    const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate();
 
     const [potlukkCreationState, dispatchPotlukk] = useReducer(potlukkHostReducer, initialPotlukkState);
@@ -83,7 +85,7 @@ export function HostPage() {
         console.log(returnPotlukk.potlukkId);
         console.log(returnPotlukk.details.title);
 
-        inviteState.invitedLukkers.map(async (luk) => sendInvite({potlukkId: returnPotlukk.potlukkId, potlukkerId:luk.userId}));
+        inviteState.invitedLukkers.map(async (luk) => sendInvite({ potlukkId: returnPotlukk.potlukkId, potlukkerId: luk.userId }));
 
         navigate("/home");
     }
@@ -97,7 +99,7 @@ export function HostPage() {
             <label htmlFor="title">Title</label>
             <input id="title" type="text" onChange={e => dispatchPotlukk({ type: "SET_TITLE", payload: e.target.value })} required />
 
-            <input type='datetime-local' onChange={e => dispatchPotlukk({ type: "SET_TIME", payload: ((Date.parse(e.target.value))/1000) })} required />
+            <input type='datetime-local' onChange={e => dispatchPotlukk({ type: "SET_TIME", payload: ((Date.parse(e.target.value)) / 1000) })} required />
 
             <label htmlFor="location">Location</label>
             <input type="text" onChange={e => dispatchPotlukk({ type: "SET_LOCATION", payload: e.target.value })} required />
@@ -108,16 +110,14 @@ export function HostPage() {
             <label htmlFor="isPublic">Make Public</label>
             <input id="isPublic" type="checkbox" onChange={e => dispatchPotlukk({ type: "SET_PUBLIC", payload: e.target.checked })} />
 
-            <button type="submit">Create</button>
+            <button onClick={ (e) => {e.preventDefault();setOpenModal(true)} }>Create</button>
+            {openModal && <PotlukkConfirmationModal setOpenModal={setOpenModal} submitData={submitData} />}
+
         </form>
+        
 
-        {/* <label htmlFor="tags">Add a tag</label>
-        <input id="tags" type="text" />
-        <button onClick={e => dispatchPotlukk({ type:"SET_TAG", payload: e.target.value})}>Add</button>
 
-        <ul>
 
-        </ul> */}
 
         <input type="text" placeholder="Search Lukkers" onChange={e => setForm({ ...form, username: e.target.value })} />
 
