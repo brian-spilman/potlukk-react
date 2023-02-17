@@ -50,7 +50,7 @@ export function RegistrationPage() {
             alert("Success\n You are registered!");
             navigate("/home");
         } else {
-            alert("Oops\nYour passwords do not match");
+            alert("Oops\nPasswords issues!!");
         }
 
     }
