@@ -19,6 +19,17 @@ export type InvitationSendInput = {
     potlukkerId: number
 }
 
+export type PotlukkDetailsSwapInput = {
+  potlukkId: number,
+  title: string,
+  location: string,
+  status: "SCHEDULED" | "CANCELLED" | "",
+  description: string,
+  isPublic: boolean,
+  time: number,
+  tags: string[]
+}
+
 
 
 export async function getLukkers(): Promise<Lukker[]>{
@@ -239,6 +250,57 @@ export async function updateInvite(potlukkId: number, potlukkerId: number, statu
   const responseBody = await httpResponse.json();
   //console.log(responseBody);
   const potlukk: Potlukk = responseBody.data.updateInvite;
+  //console.log(potlukk.dishes);
+  return potlukk;
+}
+
+export async function updatePotlukk(updateInfo: PotlukkDetailsSwapInput): Promise<Potlukk> {
+  const query = `mutation updatePotlukk($updateInput: PotlukkDetailsSwapInput!){
+    swapPotlukkDetails(input:$updateInput){
+      potlukkId
+      details{
+        title
+        location
+        status
+        description
+        isPublic
+        time
+        tags
+      }
+      host{
+        userId
+        username
+        fname
+        lname
+        allergies
+      }
+      invitations{
+        status
+        potlukker{
+          userId
+          username
+          fname
+          lname
+          allergies
+        }
+      }
+      dishes{
+        name
+        description
+        broughtBy
+        serves
+        allergens
+      }
+    }
+  }`
+
+  const variables = {updateInput:updateInfo};
+
+  const requestBody = JSON.stringify({query,variables});
+  const httpResponse = await fetch("http://127.0.0.1:8000/graphql", {method:"POST", body:requestBody, headers:{"Content-Type":"application/json"}});
+  const responseBody = await httpResponse.json();
+  //console.log(responseBody);
+  const potlukk: Potlukk = responseBody.data.swapPotlukkDetails;
   //console.log(potlukk.dishes);
   return potlukk;
 }

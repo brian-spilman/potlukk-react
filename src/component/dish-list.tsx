@@ -27,7 +27,7 @@ export function DishList(props: DishListProps) {
         <button onClick={() => dispatch({ type: "REQUEST_SAVE_DISHES", payload: props.potlukkId })}>Save Dishes</button>
 
         <ul>
-            {dishes.map(d => <li key={d.name}>{d.name}
+            {dishes.map(d => <li key={d.name}>{d.name}  --- Allergens: {d.allergens.map(a=> <b>{a} </b>)}
                 <button onClick={() => {setOpenModal(true)}}>Edit</button>
 
                 {/* if openModal is equal to true then DishModal component will render */}
