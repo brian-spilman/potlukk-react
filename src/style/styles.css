@@ -49,7 +49,7 @@ input:focus {
     color: white;
 }
 
-#username {
+.username {
     display: inline;
     color: white;
 }
