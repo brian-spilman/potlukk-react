@@ -16,7 +16,7 @@ export function NavBar() {
 
     return <div style={{ backgroundColor: "#0085fc", color: "white", height: "50px", padding: "5px" }}>
         <ul style={{ listStyle: "none" }}>
-            <li id="username">{localStorage.getItem("username")}</li>
+            <li style={{display: "inline", color: "white"}}>{localStorage.getItem("username")}</li>
             <span style={{paddingLeft: "100px"}}>
                 <li className="navBarItem"><Link to="/home">Home</Link></li>
                 <li className="navBarItem"><Link to="/host">Host</Link></li>

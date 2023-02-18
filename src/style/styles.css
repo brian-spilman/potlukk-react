@@ -49,11 +49,6 @@ input:focus {
     color: white;
 }
 
-.username {
-    display: inline;
-    color: white;
-}
-
 #logoutBtn {
     display: inline;
     color: white;
@@ -79,12 +74,18 @@ a.active {
     margin: 100px auto;
 }
 
+#homepageDiv {
+    width: 80%;
+    margin: 100px auto;
+    height: 450px;
+}
+
 .homePageList {
     border: 1px solid black;
-    height: 350px;
+    height: 400px;
     width: 250px;
     display: inline-block;
-    margin: 100px;
+    margin: 0px 100px;
     text-align: center;
 }
 
