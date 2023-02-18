@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.signInBtn {
+    color: white;
+    background-color: #4badfe;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #0085fc;
+}
+
+input:hover {
+    outline-color: #0085fc;
+}
+
+input:focus {
+    outline-color: #0085fc;
+}
+
+.registerBtn {
+    color: white;
+    background-color: #4badfe;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    height: 50px;
+    width: 190px;
+}
+
+.checkbox {
+    height: 15px;
+    width: 15px;
+    margin-right: 8px;
+}
+
+.navBarItem {
+    display: inline;
+    padding-left: 50px;
+    color: white;
+}
+
+#username {
+    display: inline;
+    color: white;
+}
+
+#logoutBtn {
+    display: inline;
+    color: white;
+    float: right;
+    padding-right: 30px;
+}
+
+a:visited {
+    color: #89bae7;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover,
+a.active {
+    color: white;
+}
+
+#container {
+    width: 80%;
+    margin: auto;
+}
+
+.homePageList {
+    border: 1px solid black;
+    height: 350px;
+    width: 250px;
+    display: inline-block;
+    margin: 100px;
+    text-align: center;
+}
+

@@ -11,46 +11,73 @@ type SignInForm = {
 export function SignInPage() {
 
     const navigate = useNavigate();
-    const [form, setForm] = useState<SignInForm>({username:"", password:""});
+    const [form, setForm] = useState<SignInForm>({ username: "", password: "" });
 
-    async function signIn(event:FormEvent<HTMLFormElement>){
+    async function signIn(event: FormEvent<HTMLFormElement>) {
 
         event.preventDefault();
 
-        const lukker = await signInLukker({username:form.username, password:form.password});
-        //if(lukker.msg) if fail then alert and stay on sign in
-        // else go to home
-        if(lukker.username === form.username){ // FIX!! Redirects back to sign in even if info correct
+        const lukker = await signInLukker({ username: form.username, password: form.password });
+
+        if (lukker.username === form.username) {
 
             localStorage.setItem("username", lukker.username);
             localStorage.setItem("userId", lukker.userId.toString());
 
             navigate("/home");
-            
-        }else{
+
+        } else {
             alert("Incorrect login information");
         }
     }
 
-    function registrationGoTo(){
+    function registrationGoTo() {
         navigate("/registration");
     }
 
     return <>
-        <form onSubmit={(e:FormEvent<HTMLFormElement>) => signIn(e)}>
-            <h1>Sign Page</h1>
+        <div style={{ border: "1px solid #A9A9A9", width: "200px", margin: "auto", paddingRight: "55px", marginTop: "60px" }}>
+            <form onSubmit={(e: FormEvent<HTMLFormElement>) => signIn(e)}>
+                <ul style={{ listStyle: "none" }}>
+                    <li>
+                        <h3>Sign In</h3>
+                        <hr style={{ border: "1px solid #c2e3ff", width: "180px" }} />
+                    </li>
 
-            <label htmlFor="username">User Name</label>
-            <input id="username" type="text" placeholder="johndoe24" onChange={e => setForm({...form, username:e.target.value})} />
+                    <li>
+                        <label htmlFor="username">User Name:</label>
+                    </li>
+                    <li>
+                        <input id="username" type="text" placeholder="johndoe24" onChange={e => setForm({ ...form, username: e.target.value })}
+                            style={{ height: "20px" }}
+                        />
+                    </li>
+                    < br />
 
-            <label htmlFor="password">Password</label>
-            <input id="password" type="text" placeholder="******" onChange={e => setForm({...form, password:e.target.value})} />
 
-            <button type="submit">Sign In</button>
-            <hr />
-            <h2>New User</h2>
-            <button onClick={registrationGoTo}>Sign Up</button>
-        </form>
+                    <li>
+                        <label htmlFor="password">Password:</label>
+                    </li>
+                    <li>
+                        <input id="password" type="text" placeholder="******" onChange={e => setForm({ ...form, password: e.target.value })}
+                            style={{ height: "20px" }}
+                        />
+                    </li>
+                    <br />
+
+                    <li>
+                        <button type="submit" className="signInBtn">SIGN IN</button>
+                    </li>
+
+                    <br />
+                    <hr style={{ border: "1px solid #c2e3ff", width: "180px" }} />
+                    <h3>New User</h3>
+
+                    <button className="signInBtn" onClick={registrationGoTo}>SIGN UP</button>
+
+                </ul>
+            </form>
+        </div>
 
     </>
 }

@@ -48,7 +48,7 @@ type HostedPotlukksProps = {
 
 export function HostedPotlukksList(props: HostedPotlukksProps) {
 
-    return <>
+    return <div className="homePageList">
 
         <h2>Hosted Potlukks</h2>
         <ul>
@@ -58,6 +58,6 @@ export function HostedPotlukksList(props: HostedPotlukksProps) {
             </>: <b>{p.details.status} </b>}</li>)}
         </ul>
 
-    </>
+    </div>
 
 }

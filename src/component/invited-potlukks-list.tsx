@@ -7,13 +7,13 @@ type InvitedPotlukksProps = {
 
 export function InvitedPotlukksList(props: InvitedPotlukksProps) {
 
-    return <>
+    return <div className="homePageList">
     
         <h2>Invited Potlukks</h2>
         <ul>
             {props.potlukks.filter(p => p.invitations.some(i => i.potlukker.userId===Number(localStorage.getItem("userId")))).map(p => <li key={p.potlukkId}><Link to={`/potlukkinfoguest/${p.potlukkId}`}>{p.details.title}</Link> </li>)}
         </ul>
     
-    </>
+    </div>
 
 }

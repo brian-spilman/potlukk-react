@@ -41,7 +41,6 @@ const initialPotlukkState: PotlukkCreationState = {
     description: "",
     isPublic: false,
     time: 0,
-    // tags: []
 }
 
 
@@ -59,14 +58,6 @@ export function HostPage() {
 
     async function submitData(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-
-        // insert confirmation here
-        // useState?
-        //modal?????
-
-        // if(!confirmed){
-        //     return;
-        // }
 
         let potlukk: PotlukkCreationInput = {
             details: {
@@ -114,10 +105,6 @@ export function HostPage() {
             {openModal && <PotlukkConfirmationModal setOpenModal={setOpenModal} submitData={submitData} />}
 
         </form>
-        
-
-
-
 
         <input type="text" placeholder="Search Lukkers" onChange={e => setForm({ ...form, username: e.target.value })} />
 

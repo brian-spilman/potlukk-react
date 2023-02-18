@@ -9,25 +9,26 @@ import { NavBar } from "../component/navbar";
 
 export function HomePage() {
 
-    const {isLoading, isError, data = []} = useQuery("potlukks", getAllPotlukks);
+    const { isLoading, isError, data = [] } = useQuery("potlukks", getAllPotlukks);
 
-    if(isLoading){
+    if (isLoading) {
         return <p>LOADING</p>
     }
-    if(isError){
+    if (isError) {
         return <p>OH NO THERE WAS A PROBLEM</p>
     }
 
 
     return <>
 
-        <NavBar/>
-    
-        <h1>Home Page</h1>
-
-        <HostedPotlukksList hostId={Number(localStorage.getItem("userId"))} potlukks={data}/>
-
-        <InvitedPotlukksList potlukks={data}/>
+        <NavBar />
+        <div id="container">
+            <InvitedPotlukksList potlukks={data} />
+            <HostedPotlukksList hostId={Number(localStorage.getItem("userId"))} potlukks={data} />
+            <div className="homePageList">
+                <h2>Notifications</h2>
+            </div>
+        </div>
 
     </>
 }
