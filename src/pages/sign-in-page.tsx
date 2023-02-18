@@ -43,7 +43,6 @@ export function SignInPage() {
                         <h3>Sign In</h3>
                         <hr style={{ border: "1px solid #c2e3ff", width: "180px" }} />
                     </li>
-
                     <li>
                         <label htmlFor="username">User Name:</label>
                     </li>
@@ -52,9 +51,6 @@ export function SignInPage() {
                             style={{ height: "20px" }}
                         />
                     </li>
-                    < br />
-
-
                     <li>
                         <label htmlFor="password">Password:</label>
                     </li>
@@ -63,13 +59,10 @@ export function SignInPage() {
                             style={{ height: "20px" }}
                         />
                     </li>
-                    <br />
-
                     <li>
                         <button type="submit" className="signInBtn">SIGN IN</button>
                     </li>
 
-                    <br />
                     <hr style={{ border: "1px solid #c2e3ff", width: "180px" }} />
                     <h3>New User</h3>
 

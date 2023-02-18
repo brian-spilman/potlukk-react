@@ -9,7 +9,7 @@ import { BasicLukker } from "../component/invited-lukker-list";
 import { PotlukkCreationState, PotlukkDetails, potlukkHostReducer } from '../reducers/potlukk-host-reducer'
 import { useNavigate } from "react-router-dom";
 import { createPotlukk, sendInvite } from "../api/lukker-requests";
-import { PotlukkConfirmationModal } from "../component/potlukk-confirmation-modal";
+import { PotlukkConfirmationModal } from "../component/modals/potlukk-confirmation-modal";
 
 export type SearchForm = {
     username: string
@@ -98,7 +98,6 @@ export function HostPage() {
                                 required
                             />
                         </li>
-                        <br />
                         <li>
                             <label htmlFor="time">Time </label>
                         </li>
@@ -108,7 +107,6 @@ export function HostPage() {
                                 required
                             />
                         </li>
-                        <br />
                         <li>
                             <label htmlFor="location">Location </label>
                         </li>
@@ -116,17 +114,15 @@ export function HostPage() {
                             style={{ height: "20px", width: "200px" }}
                             required
                         />
-                        <br /><br />
                         <li>
                             <label htmlFor="description">Description </label>
                         </li>
                         <li>
-                            <input type="text" onChange={e => dispatchPotlukk({ type: "SET_DESCRIPTION", payload: e.target.value })}
+                            <input type="textarea"  onChange={e => dispatchPotlukk({ type: "SET_DESCRIPTION", payload: e.target.value })}
                                 style={{ height: "20px", width: "200px" }}
                                 required
                             />
                         </li>
-                        <br />
                         <li>
                             <label htmlFor="isPublic">Make Public </label>
                             <input id="isPublic" type="checkbox" onChange={e => dispatchPotlukk({ type: "SET_PUBLIC", payload: e.target.checked })}
@@ -142,7 +138,8 @@ export function HostPage() {
                 </form>
             </div>
             <div className="hostComponent">
-                <input type="text" placeholder="Search Lukkers" onChange={e => setForm({ ...form, username: e.target.value })}
+                <label htmlFor="searchLukkers">Search Lukkers: </label>
+                <input id="searchLukkers"type="text" placeholder="username" onChange={e => setForm({ ...form, username: e.target.value })}
                     style={{ height: "20px", width: "200px" }}
                 />
 

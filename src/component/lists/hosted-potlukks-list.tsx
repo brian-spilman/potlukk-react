@@ -48,14 +48,16 @@ type HostedPotlukksProps = {
 
 export function HostedPotlukksList(props: HostedPotlukksProps) {
 
-    return <div className="homePageList">
+    return <div id="hostedPotlukkStyles">
 
         <h2>Hosted Potlukks</h2>
-        <ul style={{listStyle: "none"}}>
-            {props.potlukks.filter(p => p.host.userId === props.hostId).map(p => <li key={p.potlukkId}><Link to={`/potlukkinfohost/${p.potlukkId}`} style={{color:"black"}}>{p.details.title} - </Link>
-            {p.details.status === "CANCELLED" ? <>
-            <span style={{color: "red"}}><b>{p.details.status}</b></span>
-            </>: <b>{p.details.status} </b>}</li>)}
+        <ul>
+            {props.potlukks.filter(p => p.host.userId === props.hostId).map(p => <li key={p.potlukkId}><Link to={`/potlukkinfohost/${p.potlukkId}`}
+                style={{ color: "black", fontSize: "20px" }}>{p.details.title}</Link>
+                
+                {p.details.status === "CANCELLED" ? <>
+                    <span style={{ color: "red" }}><b> - {p.details.status}</b></span>
+                </> : null}</li>)}
         </ul>
 
     </div>

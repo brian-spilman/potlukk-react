@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { getAllPotlukks, PotlukkDetailsSwapInput, updatePotlukk } from "../api/lukker-requests";
 import { AttendeesList } from "../component/attendees-list";
 import { NavBar } from "../component/navbar";
-import { DishModal } from "../component/dish-modal";
+import { DishModal } from "../component/modals/dish-modal";
 import { FormEvent, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DishAction, DishState } from "../reducers/bring-dish-reducer";

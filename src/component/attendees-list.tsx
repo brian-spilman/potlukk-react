@@ -1,4 +1,4 @@
-import { Invitation } from "./hosted-potlukks-list"
+import { Invitation } from "./lists/hosted-potlukks-list"
 
 type AttendeesListProps = {
     attendees: Invitation[],

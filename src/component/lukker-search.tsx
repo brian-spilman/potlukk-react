@@ -23,14 +23,14 @@ export function LukkerSearch(props: LukkerSearchProps) {
     return <>
 
         <h2>Lukkers: </h2>
-        <ul style={{ listStyle: "none" }}>
+        <ul>
             {data.filter(lukker => lukker.username.includes(props.usernameToSearch)).map(p =>
-                <li key={p.userId}>{p.username}: {p.fname} {p.lname}
-                    <button onClick={() => props.dispatch({ type: "INVITE_LUKKER", payload: { userId: p.userId, username: p.username, fname: p.fname, lname: p.lname } })}
+                <li key={p.userId}>{p.username}: {p.fname} {p.lname} <button
+                    onClick={() => props.dispatch({ type: "INVITE_LUKKER", payload: { userId: p.userId, username: p.username, fname: p.fname, lname: p.lname } })}
                     className="inviteBtn"
-                    >
-                        Invite
-                    </button>
+                >
+                    Invite
+                </button>
                 </li>)}
         </ul>
 

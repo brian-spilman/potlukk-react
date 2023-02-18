@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { getAllPotlukks } from "../api/lukker-requests";
-import { HostedPotlukksList } from "../component/hosted-potlukks-list";
-import { InvitedPotlukksList } from "../component/invited-potlukks-list";
+import { HostedPotlukksList } from "../component/lists/hosted-potlukks-list";
+import { InvitedPotlukksList } from "../component/lists/invited-potlukks-list";
 import { LukkerInfo } from "../component/lukker-info";
 import { NavBar } from "../component/navbar";
 
@@ -25,7 +25,7 @@ export function HomePage() {
         <div id="homepageDiv">
             <InvitedPotlukksList potlukks={data} />
             <HostedPotlukksList hostId={Number(localStorage.getItem("userId"))} potlukks={data} />
-            <div className="homePageList">
+            <div id="notificationStyles">
                 <h2>Notifications</h2>
             </div>
         </div>

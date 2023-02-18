@@ -1,6 +1,6 @@
 import {takeEvery, put, all, select} from "@redux-saga/core/effects"
 import { getAllPotlukks, saveDishes } from "../api/lukker-requests";
-import { Dish, Potlukk } from "../component/hosted-potlukks-list";
+import { Dish, Potlukk } from "../component/lists/hosted-potlukks-list";
 import { CreateDishFromFormAction, RequestPopulateDishesAction, RequestSaveDishesAction } from "../reducers/bring-dish-reducer";
 
 export function* createDishFromFormData(action:CreateDishFromFormAction){

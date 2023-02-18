@@ -1,5 +1,9 @@
-body {
-    font-family: Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
+
+body,
+input,
+button {
+    font-family: 'Quicksand', sans-serif;
     margin: 0;
 }
 
@@ -13,7 +17,8 @@ body {
     font-size: 15px;
 }
 
-.bigBtn:hover, .signInBtn:hover {
+.bigBtn:hover,
+.signInBtn:hover {
     background-color: #0085fc;
 }
 
@@ -36,6 +41,24 @@ input:focus {
     height: 50px;
     width: 190px;
 }
+
+#noBtn {
+    color: white;
+    background-color: #e00034;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    height: 50px;
+    width: 190px;
+    margin-left: 80px;
+}
+
+#noBtn:hover {
+    background-color: #b8002b;
+}
+
 
 .checkbox {
     height: 15px;
@@ -80,13 +103,56 @@ a.active {
     height: 450px;
 }
 
-.homePageList {
-    border: 1px solid black;
+#hostedPotlukkStyles {
+    border: 1px solid #4badfe;
     height: 400px;
-    width: 250px;
+    width: 280px;
     display: inline-block;
     margin: 0px 100px;
     text-align: center;
+    border-radius: 20px;
+    position: absolute;
+    top: 20%;
+    left: 35%;
+}
+
+
+#hostedPotlukkStyles a:hover {
+    font-weight: bold !important;
+    color: #0085fc !important;
+}
+
+#invitedPotlukkStyles a:hover {
+    font-weight: bold !important;
+    color: #0085fc !important;
+}
+
+
+#notificationStyles {
+    border: 1px solid #4badfe;
+    height: 400px;
+    width: 280px;
+    display: inline-block;
+    margin: 0px 100px;
+    text-align: center;
+    border-radius: 20px;
+    position: absolute;
+    top: 20%;
+    left: 55%;
+}
+
+
+#invitedPotlukkStyles {
+    border: 1px solid #4badfe;
+    height: 400px;
+    width: 280px;
+    display: inline-block;
+    margin: 0px 100px;
+    text-align: center;
+    border-radius: 20px;
+    position: absolute;
+    top: 20%;
+    left: 15%;
 }
 
 .hostComponent {
@@ -97,19 +163,59 @@ a.active {
 
 .inviteBtn {
     color: white;
-    background-color: #4badfe; 
+    background-color: #4badfe;
     border: none;
     height: 25px;
     width: 70px;
     border-radius: 15px;
+}
+
+.inviteBtn:hover {
+    background-color: #0085fc;
 }
 
 .removeBtn {
     color: white;
-    background-color: #a20025; 
+    background-color: #e00034;
     border: none;
     height: 25px;
     width: 70px;
     border-radius: 15px;
 }
 
+.removeBtn:hover {
+    background-color: #b8002b;
+}
+
+/* confirmation prompt for creating potlukk  */
+.modalBackground {
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+.modalContainer {
+    width: 478px;
+    height: 200px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    flex-direction: column;
+    padding: 25px;
+    position: absolute;
+    top: 30%;
+    left: 35%;
+}
+
+.modalContainer .title {
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+li {
+    margin: 10px 0px;
+    list-style: none;
+}

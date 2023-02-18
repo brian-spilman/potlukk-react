@@ -51,7 +51,7 @@ export function RegistrationPage() {
             <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
 
                 <div style={{ display: "inline-block", verticalAlign: "middle" }}>
-                    <ul style={{ listStyle: "none" }}>
+                    <ul>
                         <li>
                             <label htmlFor="firstName">First Name</label>
                         </li>
@@ -60,7 +60,6 @@ export function RegistrationPage() {
                                 style={{ width: "250px", height: "20px" }}
                             />
                         </li>
-                        <br />
                         <li>
                             <label htmlFor="firstName">Last Name</label>
                         </li>
@@ -69,7 +68,6 @@ export function RegistrationPage() {
                                 style={{ width: "250px", height: "20px" }}
                             />
                         </li>
-                        <br />
                         <li>
                             <label htmlFor="username">Username</label>
                         </li>
@@ -78,14 +76,13 @@ export function RegistrationPage() {
                                 style={{ width: "250px", height: "20px" }}
                             />
                         </li>
-                        <br />
                         <li>
                             <label htmlFor="firstPassword">Password <span style={{ color: "red" }}>*</span></label>
                         </li>
                         <li>
                             <input id="firstPassword" type="text" placeholder="*****" onChange={e => { dispatch({ type: "SET_PASSWORD_ONE", payload: e.target.value }); dispatch({ type: "VERIFY_LUKKER" }); }} required style={{ width: "250px", height: "20px" }} />
                         </li>
-                        <br />
+
                         <li>
                             <label htmlFor="confirmPassword">Confirm Password</label>
                         </li>
@@ -98,7 +95,7 @@ export function RegistrationPage() {
                 <div style={{ display: "inline-block", verticalAlign: "middle", margin: "auto", padding: "40px" }}>
                     <h3>Allergens</h3>
                     <div style={{ border: "1px solid #A9A9A9" }}>
-                        <ul style={{ listStyle: "none", width: "130px", height: "130px", lineHeight: "30px" }}>
+                        <ul style={{  width: "140px", height: "130px" }}>
 
                             <li>     
                                 <input id="milkBox" type="checkbox" value="milk" className="checkbox" onChange={e => dispatch({ type: "SET_ALLERGY", payload: "MILK" })}></input>

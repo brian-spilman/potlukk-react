@@ -1,4 +1,4 @@
-import { DishForm } from "../component/dish-modal";
+import { DishForm } from "../component/modals/dish-modal";
 
 export type DishState = {
     dishes: Dish[],
