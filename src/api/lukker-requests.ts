@@ -1,4 +1,4 @@
-import { Dish, Potlukk } from "../component/hosted-potlukks-list";
+import { Dish, Potlukk } from "../component/lists/hosted-potlukks-list";
 import { PotlukkCreationInput } from "../pages/host-page";
 import { Lukker, PotLukkerRegistrationDetails } from "../reducers/registration-reducer";
 

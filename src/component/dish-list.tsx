@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DishAction, DishState, Dish } from "../reducers/bring-dish-reducer";
-import { DishModal } from "./dish-modal";
+import { DishModal } from "./modals/dish-modal";
 
 export type DishListProps = {
     potlukkId: number

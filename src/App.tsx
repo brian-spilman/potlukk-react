@@ -12,6 +12,7 @@ import { bringDishReducer } from './reducers/bring-dish-reducer';
 import { applyMiddleware, createStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { rootSaga } from './sagas/dish-sagas';
+import "./style/styles.css";
 
 const queryClient = new QueryClient();
 const sagaMiddleware = createSagaMiddleware();
@@ -23,7 +24,6 @@ function App() {
 
 
   return <>
-    <h1>Potlukk Website!</h1>
     <Provider store={store}>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>

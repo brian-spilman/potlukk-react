@@ -6,7 +6,7 @@ import { PotLukkerRegistrationDetails, registrationReducer, RegistrationState } 
 const initialState: RegistrationState = {
     username: "",
     password1: "",
-    password2:"",
+    password2: "",
     fname: "",
     lname: "",
     allergies: [],
@@ -15,18 +15,18 @@ const initialState: RegistrationState = {
 }
 
 export function RegistrationPage() {
-    
+
     const navigate = useNavigate();
 
     const [registrationState, dispatch] = useReducer(registrationReducer, initialState);
 
-    async function submitData(event:FormEvent<HTMLFormElement>){
+    async function submitData(event: FormEvent<HTMLFormElement>) {
 
         event.preventDefault();
 
-        if(registrationState.isVerified === true){
+        if (registrationState.isVerified === true) {
 
-            let lukker: PotLukkerRegistrationDetails = {username: "", password: "", fname: "", lname: "", allergies: []};
+            let lukker: PotLukkerRegistrationDetails = { username: "", password: "", fname: "", lname: "", allergies: [] };
             lukker.username = registrationState.username;
             lukker.password = registrationState.password1;
             lukker.fname = registrationState.fname;
@@ -47,47 +47,80 @@ export function RegistrationPage() {
     }
 
     return <>
+        <div style={{ width: "570px", margin: "auto", padding: "55px", marginTop: "60px" }}>
+            <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
 
-        <h1>Hello welcome to registration</h1>
+                <div style={{ display: "inline-block", verticalAlign: "middle" }}>
+                    <ul>
+                        <li>
+                            <label htmlFor="firstName">First Name</label>
+                        </li>
+                        <li>
+                            <input id="firstName" type="text" placeholder="John" onChange={e => dispatch({ type: "SET_FIRST_NAME", payload: e.target.value })}
+                                style={{ width: "250px", height: "20px" }}
+                            />
+                        </li>
+                        <li>
+                            <label htmlFor="firstName">Last Name</label>
+                        </li>
+                        <li>
+                            <input id="lastName" type="text" placeholder="Doe" onChange={e => dispatch({ type: "SET_LAST_NAME", payload: e.target.value })} required
+                                style={{ width: "250px", height: "20px" }}
+                            />
+                        </li>
+                        <li>
+                            <label htmlFor="username">Username</label>
+                        </li>
+                        <li>
+                            <input id="username" type="text" placeholder="JohnDoe123" onChange={e => dispatch({ type: "SET_USERNAME", payload: e.target.value })} required
+                                style={{ width: "250px", height: "20px" }}
+                            />
+                        </li>
+                        <li>
+                            <label htmlFor="firstPassword">Password <span style={{ color: "red" }}>*</span></label>
+                        </li>
+                        <li>
+                            <input id="firstPassword" type="text" placeholder="*****" onChange={e => { dispatch({ type: "SET_PASSWORD_ONE", payload: e.target.value }); dispatch({ type: "VERIFY_LUKKER" }); }} required style={{ width: "250px", height: "20px" }} />
+                        </li>
 
-        <form onSubmit={(e:FormEvent<HTMLFormElement>) => submitData(e)}>
+                        <li>
+                            <label htmlFor="confirmPassword">Confirm Password</label>
+                        </li>
+                        <li>
+                            <input type="text" id="confirmPassword" placeholder="*****" onChange={e => { dispatch({ type: "SET_PASSWORD_TWO", payload: e.target.value }); dispatch({ type: "VERIFY_LUKKER" }); }} required style={{ width: "250px", height: "20px" }} />
+                        </li>
+                    </ul>
+                </div>
 
-            <label htmlFor="firstName">First Name</label>
-            <input id="firstName" type="text" placeholder="John" onChange={e => dispatch({type:"SET_FIRST_NAME", payload:e.target.value})}/>
+                <div style={{ display: "inline-block", verticalAlign: "middle", margin: "auto", padding: "40px" }}>
+                    <h3>Allergens</h3>
+                    <div style={{ border: "1px solid #A9A9A9" }}>
+                        <ul style={{  width: "140px", height: "130px" }}>
 
-            <label htmlFor="firstName">Last Name</label>
-            <input id="lastName" type="text" placeholder="Doe" onChange={e => dispatch({type:"SET_LAST_NAME", payload:e.target.value})} required/>
+                            <li>     
+                                <input id="milkBox" type="checkbox" value="milk" className="checkbox" onChange={e => dispatch({ type: "SET_ALLERGY", payload: "MILK" })}></input>
+                                <label htmlFor="milkBox">Milk</label>
+                            </li>
+                            <li>
+                                <input id="eggBox" type="checkbox" value="egg" className="checkbox" onChange={e => dispatch({ type: "SET_ALLERGY", payload: "EGG" })}></input>
+                                <label htmlFor="eggBox">Egg</label>
+                            </li>
+                            <li>
+                                <input id="soyBox" type="checkbox" value="soy" className="checkbox" onChange={e => dispatch({ type: "SET_ALLERGY", payload: "SOY" })}></input>
+                                <label htmlFor="soyBox">Soy</label>
+                            </li>
+                            <li>
+                                <input id="nutBox" type="checkbox" value="treeNuts" className="checkbox" onChange={e => dispatch({ type: "SET_ALLERGY", payload: "TREE_NUT" })}></input>
+                                <label htmlFor="nutBox">Tree Nuts</label>
+                            </li>
+                        </ul>
+                    </div>
 
-            <hr />
-        
-            <label htmlFor="username">Username</label>
-            <input id="username" type="text" placeholder="JohnDoe123" onChange={e => dispatch({type:"SET_USERNAME", payload:e.target.value})} required/>
+                    <br />
 
-            <hr />
-
-            <label htmlFor="firstPassword">Password *</label>
-            <input id="firstPassword" type="text" placeholder="*****" onChange={e => {dispatch({type:"SET_PASSWORD_ONE", payload:e.target.value}); dispatch({type:"VERIFY_LUKKER"});}} required/>
-
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input type="text" id="confirmPassword" placeholder="*****" onChange={e => {dispatch({type:"SET_PASSWORD_TWO", payload:e.target.value}); dispatch({type:"VERIFY_LUKKER"});}} required/>
-
-            <hr />
-
-            <h4>Allergens:</h4>
-            <label htmlFor="milkBox">Milk</label>
-            <input id="milkBox" type="checkbox" value="milk" onChange={e => dispatch({type:"SET_ALLERGY", payload:"MILK"})}></input>
-            <label htmlFor="eggBox">Egg</label>
-            <input id="eggBox" type="checkbox" value="egg" onChange={e => dispatch({type:"SET_ALLERGY", payload:"EGG"})}></input>
-            <label htmlFor="soyBox">Soy</label>
-            <input id="soyBox" type="checkbox" value="soy" onChange={e => dispatch({type:"SET_ALLERGY", payload:"SOY"})}></input>
-            <label htmlFor="nutBox">Tree Nuts</label>
-            <input id="nutBox" type="checkbox" value="treeNuts" onChange={e => dispatch({type:"SET_ALLERGY", payload:"TREE_NUT"})}></input>
-
-            <hr />
-
-            <button type='submit'>Register</button>
-
-        </form>
-
+                    <button type='submit' className="bigBtn">Register</button>
+                </div>
+            </form>
+        </div>
     </>
 }

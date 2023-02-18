@@ -9,7 +9,7 @@ import { BasicLukker } from "../component/invited-lukker-list";
 import { PotlukkCreationState, PotlukkDetails, potlukkHostReducer } from '../reducers/potlukk-host-reducer'
 import { useNavigate } from "react-router-dom";
 import { createPotlukk, sendInvite } from "../api/lukker-requests";
-import { PotlukkConfirmationModal } from "../component/potlukk-confirmation-modal";
+import { PotlukkConfirmationModal } from "../component/modals/potlukk-confirmation-modal";
 
 export type SearchForm = {
     username: string
@@ -41,7 +41,6 @@ const initialPotlukkState: PotlukkCreationState = {
     description: "",
     isPublic: false,
     time: 0,
-    // tags: []
 }
 
 
@@ -59,14 +58,6 @@ export function HostPage() {
 
     async function submitData(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
-
-        // insert confirmation here
-        // useState?
-        //modal?????
-
-        // if(!confirmed){
-        //     return;
-        // }
 
         let potlukk: PotlukkCreationInput = {
             details: {
@@ -93,37 +84,71 @@ export function HostPage() {
 
         <NavBar />
 
-        <h1>Host Page</h1>
-        <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
+        <div style={{ width: "1200px", margin: "auto 500px" }}>
+            <h1>Host a Potlukk</h1>
+            <div className="hostComponent">
+                <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
+                    <ul style={{ listStyle: "none" }}>
+                        <li>
+                            <label htmlFor="title">Title </label>
+                        </li>
+                        <li>
+                            <input id="title" type="text" onChange={e => dispatchPotlukk({ type: "SET_TITLE", payload: e.target.value })}
+                                style={{ height: "20px", width: "200px" }}
+                                required
+                            />
+                        </li>
+                        <li>
+                            <label htmlFor="time">Time </label>
+                        </li>
+                        <li>
+                            <input id="time" type='datetime-local' onChange={e => dispatchPotlukk({ type: "SET_TIME", payload: ((Date.parse(e.target.value)) / 1000) })}
+                                style={{ height: "20px", width: "200px" }}
+                                required
+                            />
+                        </li>
+                        <li>
+                            <label htmlFor="location">Location </label>
+                        </li>
+                        <input type="text" onChange={e => dispatchPotlukk({ type: "SET_LOCATION", payload: e.target.value })}
+                            style={{ height: "20px", width: "200px" }}
+                            required
+                        />
+                        <li>
+                            <label htmlFor="description">Description </label>
+                        </li>
+                        <li>
+                            <input type="textarea"  onChange={e => dispatchPotlukk({ type: "SET_DESCRIPTION", payload: e.target.value })}
+                                style={{ height: "20px", width: "200px" }}
+                                required
+                            />
+                        </li>
+                        <li>
+                            <label htmlFor="isPublic">Make Public </label>
+                            <input id="isPublic" type="checkbox" onChange={e => dispatchPotlukk({ type: "SET_PUBLIC", payload: e.target.checked })}
+                                className="checkbox"
+                            />
+                        </li>
+                        <br />
+                        <button className="bigBtn" onClick={(e) => { e.preventDefault(); setOpenModal(true) }}>
+                            Create
+                        </button>
+                        {openModal && <PotlukkConfirmationModal setOpenModal={setOpenModal} submitData={submitData} />}
+                    </ul>
+                </form>
+            </div>
+            <div className="hostComponent">
+                <label htmlFor="searchLukkers">Search Lukkers: </label>
+                <input id="searchLukkers"type="text" placeholder="username" onChange={e => setForm({ ...form, username: e.target.value })}
+                    style={{ height: "20px", width: "200px" }}
+                />
 
-            <label htmlFor="title">Title</label>
-            <input id="title" type="text" onChange={e => dispatchPotlukk({ type: "SET_TITLE", payload: e.target.value })} required />
+                <LukkerSearch usernameToSearch={form.username} dispatch={dispatch} />
 
-            <input type='datetime-local' onChange={e => dispatchPotlukk({ type: "SET_TIME", payload: ((Date.parse(e.target.value)) / 1000) })} required />
+                <InvitedLukkerList invitedLukkers={inviteState.invitedLukkers} dispatch={dispatch} />
+            </div>
+        </div>
 
-            <label htmlFor="location">Location</label>
-            <input type="text" onChange={e => dispatchPotlukk({ type: "SET_LOCATION", payload: e.target.value })} required />
-
-            <label htmlFor="description">Description</label>
-            <input type="text" onChange={e => dispatchPotlukk({ type: "SET_DESCRIPTION", payload: e.target.value })} required />
-
-            <label htmlFor="isPublic">Make Public</label>
-            <input id="isPublic" type="checkbox" onChange={e => dispatchPotlukk({ type: "SET_PUBLIC", payload: e.target.checked })} />
-
-            <button onClick={ (e) => {e.preventDefault();setOpenModal(true)} }>Create</button>
-            {openModal && <PotlukkConfirmationModal setOpenModal={setOpenModal} submitData={submitData} />}
-
-        </form>
-        
-
-
-
-
-        <input type="text" placeholder="Search Lukkers" onChange={e => setForm({ ...form, username: e.target.value })} />
-
-        <LukkerSearch usernameToSearch={form.username} dispatch={dispatch} />
-
-        <InvitedLukkerList invitedLukkers={inviteState.invitedLukkers} dispatch={dispatch} />
 
     </>
 }

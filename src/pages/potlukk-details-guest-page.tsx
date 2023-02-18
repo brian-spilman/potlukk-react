@@ -38,8 +38,8 @@ export function PotlukkDetailsGuestPage() {
         <h2>Time: </h2>
         <h3>{date.toString()}</h3>
 
-        <button onClick={acceptInvite}>Accepted</button>
-        <button onClick={declineInvite}>Declined</button>
+        <button onClick={acceptInvite}>Accept</button>
+        <button onClick={declineInvite}>Decline</button>
         <button onClick={maybeInvite}>Maybe</button>
 
         <AttendeesList attendees={myPotlukk.invitations} isGuest={true} />
