@@ -16,13 +16,20 @@ export function InvitedLukkerList(props: InvitedLukkerProps) {
 
     return <>
 
-        <h1>Invited Lukkers: </h1>
-    
-        <ul>
-            {props.invitedLukkers.map(luk => <li key={luk.userId}>{luk.username} {luk.fname} {luk.lname} 
-            <button onClick={() => props.dispatch({type: "REVOKE_INVITE", payload: luk.userId})}>Remove</button></li>)}
+        <h2>Invited Lukkers: </h2>
+
+        <ul style={{ listStyle: "none" }}>
+            {props.invitedLukkers.map(luk =>
+                <li key={luk.userId}>{luk.username}: {luk.fname} {luk.lname}
+                    <button onClick={() => props.dispatch({ type: "REVOKE_INVITE", payload: luk.userId })}
+                        className="removeBtn"
+                    >
+                        Remove
+                    </button>
+                </li>)
+            }
         </ul>
-    
+
     </>
 
 

@@ -121,7 +121,7 @@ export function RegistrationPage() {
 
                     <br />
 
-                    <button type='submit' className="registerBtn">Register</button>
+                    <button type='submit' className="bigBtn">Register</button>
                 </div>
             </form>
         </div>

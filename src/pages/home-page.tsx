@@ -22,7 +22,7 @@ export function HomePage() {
     return <>
 
         <NavBar />
-        <div id="container">
+        <div className="container">
             <InvitedPotlukksList potlukks={data} />
             <HostedPotlukksList hostId={Number(localStorage.getItem("userId"))} potlukks={data} />
             <div className="homePageList">
