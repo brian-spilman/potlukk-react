@@ -85,7 +85,7 @@ export function HostPage() {
         <NavBar />
 
         <div className="pageContainer" style={{margin: "100px 500px"}}>
-            <h1>Host a Potlukk</h1>
+            <h1 style={{marginLeft: "70px"}}>Host a Potlukk</h1>
             <div className="hostComponent">
                 <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
                     <ul style={{ listStyle: "none" }}>
