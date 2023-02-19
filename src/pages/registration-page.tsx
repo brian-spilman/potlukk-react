@@ -95,9 +95,8 @@ export function RegistrationPage() {
                 <div style={{ display: "inline-block", verticalAlign: "middle", margin: "auto", padding: "40px" }}>
                     <h3>Allergens</h3>
                     <div style={{ border: "1px solid #A9A9A9" }}>
-                        <ul style={{  width: "140px", height: "130px" }}>
-
-                            <li>     
+                        <ul style={{ width: "140px", height: "130px" }}>
+                            <li>
                                 <input id="milkBox" type="checkbox" value="milk" className="checkbox" onChange={e => dispatch({ type: "SET_ALLERGY", payload: "MILK" })}></input>
                                 <label htmlFor="milkBox">Milk</label>
                             </li>
