@@ -80,14 +80,14 @@ export function RegistrationPage() {
                             <label htmlFor="firstPassword">Password <span style={{ color: "red" }}>*</span></label>
                         </li>
                         <li>
-                            <input id="firstPassword" type="text" placeholder="*****" onChange={e => { dispatch({ type: "SET_PASSWORD_ONE", payload: e.target.value }); dispatch({ type: "VERIFY_LUKKER" }); }} required style={{ width: "250px", height: "20px" }} />
+                            <input id="firstPassword" type="password" placeholder="**********" onChange={e => { dispatch({ type: "SET_PASSWORD_ONE", payload: e.target.value }); dispatch({ type: "VERIFY_LUKKER" }); }} required style={{ width: "250px", height: "20px" }} />
                         </li>
 
                         <li>
                             <label htmlFor="confirmPassword">Confirm Password</label>
                         </li>
                         <li>
-                            <input type="text" id="confirmPassword" placeholder="*****" onChange={e => { dispatch({ type: "SET_PASSWORD_TWO", payload: e.target.value }); dispatch({ type: "VERIFY_LUKKER" }); }} required style={{ width: "250px", height: "20px" }} />
+                            <input type="password" id="confirmPassword" placeholder="**********" onChange={e => { dispatch({ type: "SET_PASSWORD_TWO", payload: e.target.value }); dispatch({ type: "VERIFY_LUKKER" }); }} required style={{ width: "250px", height: "20px" }} />
                         </li>
                     </ul>
                 </div>

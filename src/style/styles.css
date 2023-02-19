@@ -104,7 +104,7 @@ a.active {
 }
 
 #hostedPotlukkStyles {
-    border: 1px solid #4badfe;
+    border: 2px solid #4badfe;
     height: 400px;
     width: 280px;
     display: inline-block;
@@ -129,7 +129,7 @@ a.active {
 
 
 #notificationStyles {
-    border: 1px solid #4badfe;
+    border: 2px solid #4badfe;
     height: 400px;
     width: 280px;
     display: inline-block;
@@ -143,7 +143,7 @@ a.active {
 
 
 #invitedPotlukkStyles {
-    border: 1px solid #4badfe;
+    border: 2px solid #4badfe;
     height: 400px;
     width: 280px;
     display: inline-block;
@@ -227,7 +227,7 @@ li {
     width: 200px;
 }
 
-/* used for editing potlukk event, dishes, inviting attendees on edit page */
+/* used for editing potlukk event, dishes, inviting attendees, accepting invite */
 .updatePotlukkBtn {
     background-color: #4badfe;
     color: white;
@@ -308,4 +308,18 @@ li {
     border: 1px solid #0085fc;
     margin: 20px 0px;
     border-radius: 20px;
+}
+
+#declineInviteBtn {
+    background-color:#e00034;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+}
+
+#declineInviteBtn:hover {
+    background-color: #b8002b;
 }
