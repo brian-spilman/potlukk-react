@@ -110,7 +110,7 @@ export function PotlukkDetailsHostPage() {
 
         <NavBar />
         <div style={{ width: "1200px", margin: "100px 400px" }}>
-            <h1>Edit Potlukk</h1>
+            <h1 style={{marginLeft: "32px"}}>Edit Potlukk</h1>
             <div className="hostComponent" style={{ width: "220px" }}>
                 <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
                     <li>
@@ -175,6 +175,7 @@ export function PotlukkDetailsHostPage() {
             </div>
             <div className="hostComponent">
                 <AttendeesList attendees={myPotlukk.invitations} isGuest={false} />
+                <div style={{height: "355px"}}></div>
                 <button className="updatePotlukkBtn">Invite</button>
             </div>
         </div>
