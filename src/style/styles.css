@@ -159,28 +159,33 @@ a.active {
     display: inline-block;
     width: 400px;
     margin: auto 30px;
+    vertical-align: top;
 }
 
+/* inviting users and editing dish */
 .inviteBtn {
     color: white;
     background-color: #4badfe;
     border: none;
     height: 25px;
-    width: 70px;
+    width: 80px;
     border-radius: 15px;
+    font-size: 15px;
 }
 
 .inviteBtn:hover {
     background-color: #0085fc;
 }
 
+/* removing invites and dishes */
 .removeBtn {
     color: white;
     background-color: #e00034;
     border: none;
     height: 25px;
-    width: 70px;
+    width: 80px;
     border-radius: 15px;
+    font-size: 15px;
 }
 
 .removeBtn:hover {
@@ -188,14 +193,6 @@ a.active {
 }
 
 /* confirmation prompt for creating potlukk  */
-.modalBackground {
-    height: 100%;
-    width: 100%;
-    background-color: black;
-    margin: 0;
-    padding: 0;
-}
-
 .modalContainer {
     width: 478px;
     height: 200px;
@@ -218,4 +215,97 @@ a.active {
 li {
     margin: 10px 0px;
     list-style: none;
+}
+
+.pageContainer {
+    width: 1200px;
+    margin: auto 500px;
+}
+
+.potlukkInput {
+    height: 20px;
+    width: 200px;
+}
+
+/* used for editing potlukk event, dishes, inviting attendees on edit page */
+.updatePotlukkBtn {
+    background-color: #4badfe;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    margin-right: 3px;
+    font-size: 16px;
+}
+
+.updatePotlukkBtn:hover {
+    background-color: #0085fc;
+}
+
+#cancelPotlukkBtn {
+    background-color:#e00034;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+}
+
+#cancelPotlukkBtn:hover {
+    background-color:#b8002b;
+}
+
+#refreshBtn {
+    background-color: #4badfe;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 30px;
+    height: 30px;
+    margin-right: 3px;
+    font-size: 18px;
+}
+
+#refreshBtn:hover {
+    background-color: #0085fc;
+}
+
+#dishModalStyles {
+    width: 478px;
+    height: 380px;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    flex-direction: column;
+    padding: 25px;
+    position: absolute;
+    top: 20%;
+    left: 35%;
+}
+
+#exitBtn {
+    background-color: #e00034;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    float: right;
+    height: 20px;
+    width: 20px;
+    font-weight: bold;
+}
+
+#exitDishBtn:hover {
+    background-color: #b8002b;
+}
+
+
+#dishListDivStyles {
+    height: 300px;
+    width: 400px;
+    padding: 10px 0px;
+    border: 1px solid #0085fc;
+    margin: 20px 0px;
+    border-radius: 20px;
 }

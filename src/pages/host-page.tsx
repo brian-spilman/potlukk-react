@@ -84,7 +84,7 @@ export function HostPage() {
 
         <NavBar />
 
-        <div style={{ width: "1200px", margin: "auto 500px" }}>
+        <div className="pageContainer" style={{margin: "100px 500px"}}>
             <h1>Host a Potlukk</h1>
             <div className="hostComponent">
                 <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
@@ -94,7 +94,7 @@ export function HostPage() {
                         </li>
                         <li>
                             <input id="title" type="text" onChange={e => dispatchPotlukk({ type: "SET_TITLE", payload: e.target.value })}
-                                style={{ height: "20px", width: "200px" }}
+                                className="potlukkInput"
                                 required
                             />
                         </li>
@@ -103,7 +103,7 @@ export function HostPage() {
                         </li>
                         <li>
                             <input id="time" type='datetime-local' onChange={e => dispatchPotlukk({ type: "SET_TIME", payload: ((Date.parse(e.target.value)) / 1000) })}
-                                style={{ height: "20px", width: "200px" }}
+                                className="potlukkInput"
                                 required
                             />
                         </li>
@@ -111,7 +111,7 @@ export function HostPage() {
                             <label htmlFor="location">Location </label>
                         </li>
                         <input type="text" onChange={e => dispatchPotlukk({ type: "SET_LOCATION", payload: e.target.value })}
-                            style={{ height: "20px", width: "200px" }}
+                            className="potlukkInput"
                             required
                         />
                         <li>
@@ -119,7 +119,7 @@ export function HostPage() {
                         </li>
                         <li>
                             <input type="textarea"  onChange={e => dispatchPotlukk({ type: "SET_DESCRIPTION", payload: e.target.value })}
-                                style={{ height: "20px", width: "200px" }}
+                                className="potlukkInput"
                                 required
                             />
                         </li>

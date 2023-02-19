@@ -109,47 +109,74 @@ export function PotlukkDetailsHostPage() {
 
 
         <NavBar />
-        <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
-            <h2>Title: {myPotlukk.details.title}</h2>
-            <input type="text" placeholder="New Title" onChange={e => dispatch({ type: "SET_TITLE", payload: e.target.value })} />
-            <hr />
-            <label htmlFor="description">Description: {myPotlukk.details.description}</label>
-            <hr />
-            <input type="text" placeholder="New Description" onChange={e => dispatch({ type: "SET_DESCRIPTION", payload: e.target.value })} />
-            <hr />
-            <label htmlFor="location">Location: {myPotlukk.details.location}</label>
-            <hr />
-            <input type="text" placeholder="New Location" onChange={e => dispatch({ type: "SET_LOCATION", payload: e.target.value })} />
-            <hr />
-            <label htmlFor="dateField">Date: {date.toString()}</label>
-            <hr />
-            <input id="dateField" type='datetime-local' onChange={e => dispatch({ type: "SET_TIME", payload: ((Date.parse(e.target.value)) / 1000) })} />
-            <hr />
-            <label htmlFor="isPublic">Make Public</label>
-            <input id="isPublic" type="checkbox" onChange={e => dispatch({ type: "SET_PUBLIC", payload: e.target.checked })} />
-            <hr />
-            <button type="submit">Update</button>
+        <div style={{ width: "1200px", margin: "100px 500px" }}>
+            <h1>Edit Potlukk</h1>
+            <div className="hostComponent" style={{ width: "220px" }}>
+                <form onSubmit={(e: FormEvent<HTMLFormElement>) => submitData(e)}>
+                    <li>
+                        <label htmlFor="title">{myPotlukk.details.title}</label>
+                    </li>
+                    <li>
+                        <input id="title" type="text" placeholder="New Title" onChange={e => dispatch({ type: "SET_TITLE", payload: e.target.value })}
+                            className="potlukkInput"
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor="description">{myPotlukk.details.description}</label>
+                    </li>
+                    <li>
+                        <input type="text" placeholder="New Description" onChange={e => dispatch({ type: "SET_DESCRIPTION", payload: e.target.value })}
+                            className="potlukkInput"
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor="location">{myPotlukk.details.location}</label>
+                    </li>
+                    <li>
+                        <input type="text" placeholder="New Location" onChange={e => dispatch({ type: "SET_LOCATION", payload: e.target.value })}
+                            className="potlukkInput"
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor="dateField">{date.toString()}</label>
+                    </li>
+                    <li>
+                        <input id="dateField" type='datetime-local' onChange={e => dispatch({ type: "SET_TIME", payload: ((Date.parse(e.target.value)) / 1000) })}
+                            className="potlukkInput"
+                        />
+                    </li>
+                    <li>
+                        <label htmlFor="isPublic">Make Public </label>
+                        <input id="isPublic" type="checkbox" onChange={e => dispatch({ type: "SET_PUBLIC", payload: e.target.checked })}
+                            className="checkbox"
+                        />
+                    </li>
+                    <br />
+                    <li>
+                        <button type="submit" className="updatePotlukkBtn">Update</button>
+                        <button onClick={quitEditing} className="updatePotlukkBtn">Quit Editing</button>
+                    </li>
+                </form>
+                <form onSubmit={(e: FormEvent<HTMLFormElement>) => cancelPotlukk(e)}>
+                    <button type="submit" id="cancelPotlukkBtn">Cancel Event</button>
+                </form>
+            </div>
 
-        </form>
+            <div className="hostComponent">
+                <h2>Dishes</h2>
+                <button onClick={() => { setOpenModal(true) }}
+                    className="updatePotlukkBtn">Bring Dish
+                </button>
 
+                <DishList potlukkId={Number(potlukkID)} />
 
-        <button onClick={quitEditing}>Quit Editing</button>
-        <form onSubmit={(e: FormEvent<HTMLFormElement>) => cancelPotlukk(e)}>
-            <button type="submit">Cancel Potlukk</button>
-        </form>
-
-
-        <DishList potlukkId={Number(potlukkID)} />
-
-        <button onClick={() => { setOpenModal(true) }}>Bring Dish</button>
-        {/* if openModal is equal to true then DishModal component will render */}
-        {openModal && <DishModal setOpenModal={setOpenModal} />}
-
-        <button>Request Dish</button>
-
-        <AttendeesList attendees={myPotlukk.invitations} isGuest={false} />
-
-        <button>Invite</button>
-
+                {/* if openModal is equal to true then DishModal component will render */}
+                {openModal && <DishModal setOpenModal={setOpenModal} />}
+            </div>
+            <div className="hostComponent">
+                <AttendeesList attendees={myPotlukk.invitations} isGuest={false} />
+                <button className="updatePotlukkBtn">Invite</button>
+            </div>
+        </div>
     </>
 }
