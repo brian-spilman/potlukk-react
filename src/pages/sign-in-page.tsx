@@ -55,7 +55,7 @@ export function SignInPage() {
                         <label htmlFor="password">Password:</label>
                     </li>
                     <li>
-                        <input id="password" type="text" placeholder="******" onChange={e => setForm({ ...form, password: e.target.value })}
+                        <input id="password" type="password" placeholder="**********" onChange={e => setForm({ ...form, password: e.target.value })}
                             style={{ height: "20px" }}
                         />
                     </li>
