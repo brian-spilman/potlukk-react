@@ -1,4 +1,4 @@
-import { FormEvent, useReducer, useState } from "react";
+import { FormEvent, useEffect, useReducer, useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { InvitedLukkerList } from "../component/invited-lukker-list";
 import { LukkerInfo } from "../component/lukker-info";
@@ -46,6 +46,10 @@ const initialPotlukkState: PotlukkCreationState = {
 
 
 export function HostPage() {
+
+    useEffect(() => {
+        document.title = "Host a Potlukk";
+    });
 
     const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate();
