@@ -1,4 +1,4 @@
-import { FormEvent, FormEventHandler, useReducer, useState } from "react";
+import { FormEvent, FormEventHandler, useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createLukker } from "../api/lukker-requests";
 import { PotLukkerRegistrationDetails, registrationReducer, RegistrationState } from "../reducers/registration-reducer";
@@ -15,6 +15,10 @@ const initialState: RegistrationState = {
 }
 
 export function RegistrationPage() {
+
+    useEffect(() => {
+        document.title = "Account Registration";
+    });
 
     const navigate = useNavigate();
 

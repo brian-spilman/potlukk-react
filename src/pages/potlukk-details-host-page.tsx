@@ -4,7 +4,7 @@ import { getAllPotlukks, PotlukkDetailsSwapInput, updatePotlukk } from "../api/l
 import { AttendeesList } from "../component/attendees-list";
 import { NavBar } from "../component/navbar";
 import { DishModal } from "../component/modals/dish-modal";
-import { FormEvent, useReducer, useState } from "react";
+import { FormEvent, useEffect, useReducer, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DishAction, DishState } from "../reducers/bring-dish-reducer";
 import { DishList } from "../component/dish-list";
@@ -22,6 +22,10 @@ const initialPotlukkState: PotlukkDetailsSwapInput = {
 }
 
 export function PotlukkDetailsHostPage() {
+
+    useEffect(() => {
+        document.title = "Potlukk Details Host";
+    });
 
     const [openModal, setOpenModal] = useState(false);
     const navigate = useNavigate();

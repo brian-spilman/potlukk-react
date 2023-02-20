@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { getAllPotlukks } from "../api/lukker-requests";
 import { HostedPotlukksList } from "../component/lists/hosted-potlukks-list";
@@ -8,6 +9,10 @@ import { NavBar } from "../component/navbar";
 
 
 export function HomePage() {
+
+    useEffect(() => {
+        document.title = "Home";
+    });
 
     const { isLoading, isError, data = [] } = useQuery("potlukks", getAllPotlukks);
 

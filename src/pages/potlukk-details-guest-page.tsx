@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllPotlukks, updateInvite } from "../api/lukker-requests";
@@ -9,6 +9,10 @@ import { NavBar } from "../component/navbar";
 
 
 export function PotlukkDetailsGuestPage() {
+    
+    useEffect(() => {
+        document.title = "Potlukk Details Guest";
+    });
 
     const navigate = useNavigate();
 

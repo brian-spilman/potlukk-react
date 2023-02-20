@@ -1,5 +1,5 @@
 import { sign } from "crypto";
-import { FormEvent, useState } from "react"
+import { FormEvent, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { signInLukker } from "../api/lukker-requests";
 
@@ -9,6 +9,10 @@ type SignInForm = {
 }
 
 export function SignInPage() {
+
+    useEffect(() => {
+        document.title = "Sign In";
+    });
 
     const navigate = useNavigate();
     const [form, setForm] = useState<SignInForm>({ username: "", password: "" });
